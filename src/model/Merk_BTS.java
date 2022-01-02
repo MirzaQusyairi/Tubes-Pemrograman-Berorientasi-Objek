@@ -1,5 +1,5 @@
 
-package tubespbo;
+package model;
 
 
 public class Merk_BTS {
