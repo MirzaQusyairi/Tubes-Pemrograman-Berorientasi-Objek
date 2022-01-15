@@ -25,8 +25,8 @@ public class FormSchedule extends javax.swing.JFrame {
     public FormSchedule() {
         initComponents();
         txt_id.setVisible(false);
-        setMerk(model.getAllMerk());
-        setBTSTable(model.getAllBTS());
+       
+        setScheduleTable(model.getAllSchedule());
     }
 
     /**
@@ -41,20 +41,20 @@ public class FormSchedule extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txt_name = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_bts = new javax.swing.JTable();
+        tbl_schedule = new javax.swing.JTable();
         btn_insert = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         btn_update = new javax.swing.JButton();
-        txt_address = new javax.swing.JTextField();
         btn_delete = new javax.swing.JButton();
         txt_id = new javax.swing.JLabel();
-        txt_city = new javax.swing.JTextField();
         btn_clear = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txt_merk = new javax.swing.JComboBox<>();
+        txt_idbts = new javax.swing.JLabel();
+        txt_hari = new javax.swing.JComboBox<>();
+        txt_tahun = new javax.swing.JComboBox<>();
+        txt_bulan = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txt_status = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -62,14 +62,14 @@ public class FormSchedule extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BTS DATA");
+        jLabel1.setText("SCHEDULE DATA");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(256, 256, 256)
+                .addGap(205, 205, 205)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -82,25 +82,22 @@ public class FormSchedule extends javax.swing.JFrame {
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("Network");
+        jLabel3.setText("Date");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Address");
-
-        tbl_bts.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_schedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+                {null, null, null, null}
             },
             new String [] {
-                "item1", "item2", "item3", "item4", "item5"
+                "ID", "ID BTS", "Date", "Status"
             }
         ));
-        tbl_bts.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_schedule.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_btsMouseClicked(evt);
+                tbl_scheduleMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tbl_bts);
+        jScrollPane1.setViewportView(tbl_schedule);
 
         btn_insert.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_insert.setText("Insert");
@@ -109,9 +106,6 @@ public class FormSchedule extends javax.swing.JFrame {
                 btn_insertActionPerformed(evt);
             }
         });
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("City");
 
         btn_update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update.setText("Update");
@@ -140,10 +134,24 @@ public class FormSchedule extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("Name");
+        txt_idbts.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_idbts.setText("ID_BTS");
 
-        txt_merk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_hari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txt_tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        txt_bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setText("Date");
+
+        txt_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_status.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_statusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -152,54 +160,56 @@ public class FormSchedule extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_id)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_merk, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(txt_tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_idbts)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addComponent(txt_id)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(txt_idbts)
+                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_merk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                    .addComponent(txt_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,7 +217,7 @@ public class FormSchedule extends javax.swing.JFrame {
                     .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
 
         pack();
@@ -222,95 +232,94 @@ public class FormSchedule extends javax.swing.JFrame {
         int idInt = Integer.parseInt(txt_id.getText());
         model.delete_bts(idInt);
         clear_form();
-        setBTSTable(model.getAllBTS());
+        setScheduleTable(model.getAllSchedule());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String name = txt_name.getText();
-        String address = txt_address.getText();
-        String city = txt_city.getText();
-        Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
+        String id_bts = txt_idbts.getText();
+        String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
+        String status = (String) txt_status.getSelectedItem();
         
-        BTS b = new BTS(null, name, address, city, merk);
-        model.insert_bts(b);
+              
+        Schedule s = new Schedule(null,id_bts,tanggal,status);
+        model.insert_schedule(s);
         clear_form();
-        setBTSTable(model.getAllBTS());
+        setScheduleTable(model.getAllSchedule());
     }//GEN-LAST:event_btn_insertActionPerformed
 
-    private void tbl_btsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_btsMouseClicked
-        DefaultTableModel tblModel = (DefaultTableModel) tbl_bts.getModel();
+    private void tbl_scheduleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_scheduleMouseClicked
+        DefaultTableModel tblModel = (DefaultTableModel) tbl_schedule.getModel();
 
-        String tbl_ID = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),0);
-        String tbl_Name = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),1);
-        String tbl_Address = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),2);
-        String tbl_City = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),3);
-        String tbl_Merk = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),4);
+        String tbl_ID = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),0);
+        String tbl_ID_BTS = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),1);
+        String tbl_Tanggal = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),2);
+        String tbl_City = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),3);
+        String tbl_Merk = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),4);
         
         txt_id.setText(tbl_ID);
-        txt_name.setText(tbl_Name);
-        txt_address.setText(tbl_Address);
-        txt_city.setText(tbl_City);
-        txt_merk.setSelectedItem(tbl_Merk);
-    }//GEN-LAST:event_tbl_btsMouseClicked
+        txt_idbts.setText(tbl_ID_BTS);
+        String[] arrayDate = tbl_Tanggal.split("-");
+        int bulan = Integer.parseInt(arrayDate[1]);
+        int hari = Integer.parseInt(arrayDate[2]);
+        txt_hari.setSelectedItem(Integer.toString(hari));
+        txt_bulan.setSelectedItem(Integer.toString(bulan));
+        txt_tahun.setSelectedItem(arrayDate[0]);
+    }//GEN-LAST:event_tbl_scheduleMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         String id = txt_id.getText();
-        String name = txt_name.getText();
-        String address = txt_address.getText();
-        String city = txt_city.getText();
-        Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
-        
-        BTS b = new BTS(id, name, address, city, merk);
-        model.update_bts(b);
+        String id_bts = txt_idbts.getText();
+        String tanggal = txt_hari.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_tahun.getSelectedItem();
+        String status = (String) txt_status.getSelectedItem();
+       
+        Schedule s = new Schedule(id,id_bts,tanggal,status);
+        model.update_schedule(s);
         clear_form();
-        setBTSTable(model.getAllBTS());
+        setScheduleTable(model.getAllSchedule());
     }//GEN-LAST:event_btn_updateActionPerformed
+
+    private void txt_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_statusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_statusActionPerformed
     
     private void clear_form(){
         txt_id.setText("");
-        txt_name.setText("");
-        txt_address.setText("");
-        txt_city.setText("");
+        txt_idbts.setText("");
+        txt_status.setSelectedItem("");
+        txt_hari.setSelectedIndex(0);
+        txt_bulan.setSelectedIndex(0);
+        txt_tahun.setSelectedIndex(0);
     }
     
-    private void setBTSTable(List<BTS> listbts) {
-        if (listbts==null){
-            JOptionPane.showMessageDialog(this, "Failed get BTS data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+    private void setScheduleTable(List<Schedule> listschedule) {
+        if (listschedule==null){
+            JOptionPane.showMessageDialog(this, "Failed get Schedule data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
         }else{
             DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.setColumnIdentifiers(
                 new String[] {
                     "ID",
-                    "Name",
-                    "Address",
-                    "City",
-                    "Network"
+                    "ID_BTS",
+                    "Date",
+                    "Status"
                 }
             );
 
-            for (BTS b : listbts) {
-                Object[] o = new Object[5];
-                o[0] = b.getId();
-                o[1] = b.getName();
-                o[2] = b.getAddress();
-                o[3] = b.getCity();
-                o[4] = b.getMerk().getName();
+            for (Schedule s : listschedule) {
+                Object[] o = new Object[4];
+                o[0] = s.getId();
+                o[1] = s.getId_bts();
+                o[2] = s.getDate_schedule();
+                o[3] = s.getStatus();
                 tableModel.addRow(o);
             }
             //tbl_bts.setAutoResizeMode( javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS );
-            tbl_bts.setModel(tableModel);
+            tbl_schedule.setModel(tableModel);
             //tbl_bts.getColumnModel().getColumn(0).setMinWidth(120);
             //tbl_bts.getColumnModel().getColumn(2).setMaxWidth(50);
         }
     }
         
-    private void setMerk(List<Merk_BTS> merk){    
-        if (merk==null){
-            JOptionPane.showMessageDialog(this, "Failed get MerkBTS data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
-        }else{
-            txt_merk.setModel(new DefaultComboBoxModel(merk.toArray()));
-        }
-    }
     
     /**
      * @param args the command line arguments
@@ -360,17 +369,17 @@ public class FormSchedule extends javax.swing.JFrame {
     private javax.swing.JButton btn_insert;
     private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_bts;
-    private javax.swing.JTextField txt_address;
-    private javax.swing.JTextField txt_city;
+    private javax.swing.JTable tbl_schedule;
+    private javax.swing.JComboBox<String> txt_bulan;
+    private javax.swing.JComboBox<String> txt_hari;
     private javax.swing.JLabel txt_id;
-    private javax.swing.JComboBox<String> txt_merk;
+    private javax.swing.JLabel txt_idbts;
     private javax.swing.JTextField txt_name;
+    private javax.swing.JComboBox<String> txt_status;
+    private javax.swing.JComboBox<String> txt_tahun;
     // End of variables declaration//GEN-END:variables
 }
