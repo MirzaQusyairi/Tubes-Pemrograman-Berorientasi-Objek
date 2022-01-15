@@ -144,9 +144,9 @@ public class FormSchedule extends javax.swing.JFrame {
         txt_bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("Date");
+        jLabel4.setText("Status");
 
-        txt_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Done", "On-process" }));
         txt_status.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_statusActionPerformed(evt);
