@@ -163,10 +163,10 @@ public class Model {
     }
     public void insert_schedule(Schedule s) {
          try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(date,status,id_bts) VALUES (?,?,?,?)");            
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?,?)");            
             stmt.setString(1,s.getDate_schedule());
             stmt.setString(2,s.getStatus());
-           
+            stmt.setString(3,s.getId_bts());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Insert Schedule Success");
         } catch (SQLException sqle) {
@@ -179,7 +179,7 @@ public class Model {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE schedule set date=?,status=?,id_bts=? WHERE id=?");   
             stmt.setString(1,s.getDate_schedule());
             stmt.setString(2,s.getStatus());
-            stmt.setInt(3,s.getId());
+            stmt.setString(3,s.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Schedule Success");
         } catch (SQLException sqle) {
@@ -226,9 +226,9 @@ public class Model {
         }
         return bts;
     }
-    public List<BTS> getAllSchedule() {
-        List<BTS> bts = new ArrayList<BTS>();
-        String sql = "SELECT * FROM schedule INNER JOIN bts ON bts.id=bts.id_bts";
+    public List<Schedule> getAllSchedule() {
+        List<Schedule> schedule = new ArrayList<Schedule>();
+                String sql = "SELECT * FROM schedule INNER JOIN bts ON bts.id=bts.id_bts";
         try {
             if (kn.getKoneksi()==null){
                 return null;
@@ -237,21 +237,19 @@ public class Model {
 
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
-                    BTS b = new BTS(
+                    Schedule s = new Schedule(
                             rs.getString(1),
                             rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            new Merk_BTS(rs.getInt(5),rs.getString(7))
+                            rs.getString(3)
                     );
-                    bts.add(b);
+                    schedule.add(s);                    
                 }
                 statement.close();
             }
         } catch (Exception ex) {
             Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return bts;
+        return schedule;
     }
     public List<Merk_BTS> getAllMerk() {
         List<Merk_BTS> merk_bts = new ArrayList<Merk_BTS>();
@@ -278,58 +276,7 @@ public class Model {
         
         return merk_bts; 
     }
-    public void insert_orderMaintenance(OrderMaintenance o) {
-        try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO OrderMaintenance(id,id_user,id_bts,problem,solution,notes,approval,finish_date) VALUES (?,?,?,?)");            
-            stmt.setInt(1,o.getId());
-            stmt.setInt(2,o.getId_user());
-            stmt.setInt(3,o.getId_bts());
-            stmt.setString(4,o.getProblem);
-            stmt.setString(5,o.getSolution);
-            stmt.setString(5,o.getNotes);
-            stmt.setString(6,o.getApproval);
-            stmt.setInt(4,o.getfinish_date);
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Insert OrderMaintenance Success");
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"Insert OrderMaintenance Failed");
-        }
-    }
-    
-    public void update_orderMaintenance(OrderMaintenance o){
-        try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE OrderMaintenance set id_user = ? ,id_bts = ?,problem = ?,solution = ?,notes = ?,approval = ?,finish_date = ? WHERE id=?");   
-            stmt.setInt(1,o.getId());
-            stmt.setInt(2,o.getId_user());
-            stmt.setInt(3,o.getId_bts());
-            stmt.setString(4,o.getProblem);
-            stmt.setString(5,o.getSolution);
-            stmt.setString(5,o.getNotes);
-            stmt.setString(6,o.getApproval);
-            stmt.setInt(7,o.getfinish_date);
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Update OrderMaientenance Success");
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"OrderMaientenance Failed");
-        }
-    }
-    public void delete_OrderMaintenance(int id) {
-        try {
-            Statement stmt = (Statement) kn.getKoneksi().createStatement();
-            String sql = "DELETE FROM OrderMaintenance WHERE id ='"+id+"'";
-            stmt.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null,"Delete OrderMaintenance Success");
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"Delete OrderMaintenance Failed");
-        }
-    
-    }
-    public List<OrderMaintenance> getAllOrder() {
-        List<OrderMaintenance> Order = new ArrayList<OrderMaintenance>();
-        String sql = "SELECT * FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts";
+
     
     public void insert_checklist(Checklist c) {
         try {
