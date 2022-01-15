@@ -305,11 +305,15 @@ public class Model {
 
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
+                    OrderMaintenance o = new OrderMaintenance(
                     Checklist c = new Checklist(
                             rs.getString(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
+                            new OrderMaintenance(rs.getInt(5),rs.getString(7))
+                    );
+                    Order.add(o);
                             rs.getString(5),
                             rs.getString(6),
                             rs.getString(7)
@@ -320,6 +324,14 @@ public class Model {
                 statement.close();
             }
         } catch (Exception ex) {
+            Logger.getLogger(OrderMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Order;
+    }
+    
+    
+    }
+
             Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
         }
         return checklist;

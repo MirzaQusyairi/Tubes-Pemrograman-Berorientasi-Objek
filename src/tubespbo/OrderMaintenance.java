@@ -8,6 +8,11 @@ public class OrderMaintenance {
     private int id, id_bts, id_user;
     private String problem, solution, notes, approval;
     private LocalDate finish_date;
+    public String getProblem;
+    public String getSolution;
+    public String getNotes;
+    public String getApproval;
+    public int getfinish_date;
     
     public OrderMaintenance(int id, int id_bts, int id_user, String problem, String solution, String notes, String approval, LocalDate finish_date){
         this.id = id;
@@ -19,6 +24,8 @@ public class OrderMaintenance {
         this.approval = approval;
         this.finish_date = finish_date;
     }
+
+    
     
     public int getId(){
         return id;
@@ -26,6 +33,13 @@ public class OrderMaintenance {
     
     public void setID(int id){
         this.id = id ;
+    }
+    public int getId_user(){
+        return id_user;
+    }
+    
+    public void setID_user(int id){
+        this.id = id_user ;
     }
     
     public int getId_bts(){
