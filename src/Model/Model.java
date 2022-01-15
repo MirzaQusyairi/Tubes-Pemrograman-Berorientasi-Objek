@@ -161,7 +161,44 @@ public class Model {
             JOptionPane.showMessageDialog(null,"Delete BTS Failed");
         }
     }
-    
+    public void insert_schedule(Schedule s) {
+         try {
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(date,status,id_bts) VALUES (?,?,?,?)");            
+            stmt.setString(1,s.getDate_schedule());
+            stmt.setString(2,s.getStatus());
+           
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Insert Schedule Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Insert Schedule Failed");
+        }
+    }
+    public void update_schedule(Schedule s){
+        try {
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE schedule set date=?,status=?,id_bts=? WHERE id=?");   
+            stmt.setString(1,s.getDate_schedule());
+            stmt.setString(2,s.getStatus());
+            stmt.setInt(3,s.getId());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Update Schedule Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Update Schedule Failed");
+        }
+    }
+    public void delete_schedule(int id) {
+        try {
+            Statement stmt = (Statement) kn.getKoneksi().createStatement();
+            String sql = "DELETE FROM schedule WHERE id ='"+id+"'";
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null,"Delete Schedule Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Delete Schedule Failed");
+        }
+    }
+ 
     public List<BTS> getAllBTS() {
         List<BTS> bts = new ArrayList<BTS>();
         String sql = "SELECT * FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts";
@@ -189,7 +226,33 @@ public class Model {
         }
         return bts;
     }
-    
+    public List<BTS> getAllSchedule() {
+        List<BTS> bts = new ArrayList<BTS>();
+        String sql = "SELECT * FROM schedule INNER JOIN bts ON bts.id=bts.id_bts";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    BTS b = new BTS(
+                            rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            new Merk_BTS(rs.getInt(5),rs.getString(7))
+                    );
+                    bts.add(b);
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bts;
+    }
     public List<Merk_BTS> getAllMerk() {
         List<Merk_BTS> merk_bts = new ArrayList<Merk_BTS>();
         String sql = "SELECT * FROM merk_bts";
