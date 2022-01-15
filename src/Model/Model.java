@@ -6,6 +6,7 @@
 package Model;
 
 import View.FormMainMenu;
+import View.FormMainMenuTechnician;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +38,29 @@ public class Model {
                     User user_info = new User(rs.getInt("id"), rs.getString("name"), rs.getString("username"), rs.getString("password"), rs.getString("phone"), rs.getString("position"));
                     JOptionPane.showMessageDialog(null,"Login Success");
                     new FormMainMenu(user_info).setVisible(true);
+                    return true;
+                }
+            } else {
+                JOptionPane.showMessageDialog(null,"Username or Password wrong");
+                return false;
+            }
+        } catch (SQLException sqle) {
+            JOptionPane.showMessageDialog(null,sqle.getMessage());
+            return false;
+        }
+        return false;
+    }
+    
+    public boolean tech_login(String username,String password) {
+        try {
+            Statement stmt2 = (Statement) kn.getKoneksi().createStatement();
+            String sql = "SELECT * FROM technician WHERE username ='"+username+"' AND password='"+password+"'";
+            ResultSet rs2 = stmt2.executeQuery(sql);
+            if (rs2.next()){
+                if (username.equals(rs2.getString("username")) && password.equals(rs2.getString("password"))){
+                    Technician tech_info = new Technician(rs2.getInt("id"), rs2.getString("name"), rs2.getString("username"), rs2.getString("password"), rs2.getString("phone"), rs2.getString("team_name"));
+                    JOptionPane.showMessageDialog(null,"Login Success");
+                    new FormMainMenuTechnician(tech_info).setVisible(true);
                     return true;
                 }
             } else {
