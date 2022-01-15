@@ -134,6 +134,34 @@ public class Model {
         }
     }
     
+    public void update_bts(BTS b){
+        try {
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE bts set name=?,address=?,city=?,id_merkbts=? WHERE id=?");   
+            stmt.setString(1,b.getName());
+            stmt.setString(2,b.getAddress());
+            stmt.setString(3,b.getCity());
+            stmt.setInt(4,b.getMerk().getId());
+            stmt.setString(5,b.getId());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Update Technician Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Update Technician Failed");
+        }
+    }
+    
+    public void delete_bts(int id) {
+        try {
+            Statement stmt = (Statement) kn.getKoneksi().createStatement();
+            String sql = "DELETE FROM bts WHERE id ='"+id+"'";
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null,"Delete BTS Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Delete BTS Failed");
+        }
+    }
+    
     public List<BTS> getAllBTS() {
         List<BTS> bts = new ArrayList<BTS>();
         String sql = "SELECT * FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts";
@@ -146,7 +174,7 @@ public class Model {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     BTS b = new BTS(
-                            rs.getInt(1),
+                            rs.getString(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),

@@ -10,11 +10,10 @@ package tubespbo;
  * @author COMPUTER
  */
 public class BTS {
-    private int id, id_merk;
-    private String name, address, city;
+    private String id, name, address, city;
     private Merk_BTS merk;
 
-    public BTS(int id, String name, String address, String city, Merk_BTS merk) {
+    public BTS(String id, String name, String address, String city, Merk_BTS merk) {
         this.id = id;
         this.merk = merk;
         this.name = name;
@@ -22,11 +21,11 @@ public class BTS {
         this.city = city;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

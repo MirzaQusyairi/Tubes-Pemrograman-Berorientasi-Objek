@@ -19,16 +19,14 @@ import tubespbo.*;
 public class FormBTS extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormAddTechnician
+     * Creates new form FormBTS
      */
     Model model = new Model();
     public FormBTS() {
         initComponents();
         txt_id.setVisible(false);
-//        model.display_technician(tbl_bts);
         setMerk(model.getAllMerk());
         setBTSTable(model.getAllBTS());
-        //System.out.println(model.getAllMerk());
     }
 
     /**
@@ -221,10 +219,10 @@ public class FormBTS extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        //        int idInt = Integer.parseInt(txt_id.getText());
-        //        model.delete_technician(idInt);
-        //        clear_form();
-        //        model.display_technician(tbl_bts);
+        int idInt = Integer.parseInt(txt_id.getText());
+        model.delete_bts(idInt);
+        clear_form();
+        setBTSTable(model.getAllBTS());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -233,40 +231,39 @@ public class FormBTS extends javax.swing.JFrame {
         String city = txt_city.getText();
         Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
         
-        BTS b = new BTS(0, name, address, city, merk);
+        BTS b = new BTS(null, name, address, city, merk);
         model.insert_bts(b);
         clear_form();
         setBTSTable(model.getAllBTS());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_btsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_btsMouseClicked
-        //        DefaultTableModel tblModel = (DefaultTableModel) tbl_bts.getModel();
-        //
-        //        String tbl_ID = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),0);
-        //        String tbl_Name = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),1);
-        //        String tbl_Username = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),2);
-        //        String tbl_Password = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),3);
-        //        String tbl_Phone = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),4);
-        //        String tbl_Teamname = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),5);
-        //
-        //        txt_id.setText(tbl_ID);
-        //        txt_name.setText(tbl_Name);
-        //        txt_address.setText(tbl_Username);
-        //        txt_state.setText(tbl_Password);
-        //        txt_phone.setText(tbl_Phone);
-        //        txt_teamname.setText(tbl_Teamname);
+        DefaultTableModel tblModel = (DefaultTableModel) tbl_bts.getModel();
+
+        String tbl_ID = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),0);
+        String tbl_Name = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),1);
+        String tbl_Address = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),2);
+        String tbl_City = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),3);
+        String tbl_Merk = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),4);
+        
+        txt_id.setText(tbl_ID);
+        txt_name.setText(tbl_Name);
+        txt_address.setText(tbl_Address);
+        txt_city.setText(tbl_City);
+        txt_merk.setSelectedItem(tbl_Merk);
     }//GEN-LAST:event_tbl_btsMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        //        String id = txt_id.getText();
-        //        String name = txt_name.getText();
-        //        String phone = txt_phone.getText();
-        //        String teamname = txt_teamname.getText();
-        //        String username = txt_address.getText();
-        //        String password = txt_state.getText();
-        //        model.update_technician(id, name, phone, teamname, username, password);
-        //        clear_form();
-        //        model.display_technician(tbl_bts);
+        String id = txt_id.getText();
+        String name = txt_name.getText();
+        String address = txt_address.getText();
+        String city = txt_city.getText();
+        Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
+        
+        BTS b = new BTS(id, name, address, city, merk);
+        model.update_bts(b);
+        clear_form();
+        setBTSTable(model.getAllBTS());
     }//GEN-LAST:event_btn_updateActionPerformed
     
     private void clear_form(){
