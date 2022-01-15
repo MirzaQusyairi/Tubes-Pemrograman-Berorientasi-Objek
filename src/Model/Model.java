@@ -163,10 +163,10 @@ public class Model {
     }
     public void insert_schedule(Schedule s) {
          try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?,?)");            
-            stmt.setString(1,s.getDate_schedule());
-            stmt.setString(2,s.getStatus());
-            stmt.setString(3,s.getId_bts());
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?)");            
+            stmt.setString(1,s.getId_bts());
+            stmt.setString(2,s.getDate_schedule());
+            stmt.setString(3,s.getStatus());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Insert Schedule Success");
         } catch (SQLException sqle) {
@@ -228,7 +228,7 @@ public class Model {
     }
     public List<Schedule> getAllSchedule() {
         List<Schedule> schedule = new ArrayList<Schedule>();
-                String sql = "SELECT * FROM schedule INNER JOIN bts ON bts.id=bts.id_bts";
+                String sql = "SELECT * FROM schedule";
         try {
             if (kn.getKoneksi()==null){
                 return null;
