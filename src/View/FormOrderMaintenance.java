@@ -21,12 +21,27 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
     /**
      * Creates new form FormBTS
      */
+    private User user_info;
     Model model = new Model();
     public FormOrderMaintenance() {
         initComponents();
+    }
+    
+    public FormOrderMaintenance(User user_info) {
+        this.user_info = user_info;
+        initComponents();
+        txt_id_user.setText(Integer.toString(user_info.getId()));
         txt_id.setVisible(false);
         txt_id_user.setVisible(false);
         setOrderMaintenanceTable(model.getAllOrder());
+    }
+
+    public User getUser_info() {
+        return user_info;
+    }
+
+    public void setUser_info(User user_info) {
+        this.user_info = user_info;
     }
 
     /**
@@ -154,12 +169,6 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Problem");
 
-        txt_id_bts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_id_btsActionPerformed(evt);
-            }
-        });
-
         btn_search.setText("Search");
         btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,9 +282,9 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        //model.delete_OrderMaintenance(idInt);
+        model.delete_orderMaintenance(idInt);
         clear_form();
-//        setOrderMaintenanceTable(model.getAllOrder());
+        setOrderMaintenanceTable(model.getAllOrder());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -303,37 +312,27 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         String tbl_approval = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),6);
         String tbl_finishdate = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),7);
         
-//        txt_id.setText(tbl_id);
-//        txt_id_bts.setText(tbl_id_user);
-//        txt_idUser.setText(tbl_id_bts);
-//        txt_problem.setText(tbl_problem);
-//        txt_solution.setText(tbl_solution);
-//        txt_notes.setText(tbl_notes);
-//        txt_approval.setText(tbl_approval);
-//        txt_finishDate.setText(tbl_finishdate);
+        txt_id.setText(tbl_id);
+        txt_id_user.setText(tbl_id_user);
+        txt_id_bts.setText(tbl_id_bts);
+        txt_problem.setText(tbl_problem);
+        txt_solution.setText(tbl_solution);
+        txt_notes.setText(tbl_notes);
     }//GEN-LAST:event_tbl_orderMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-//        String id = txt_id.getText();
-//        String id_user = txt_id.getText();
-//        String id_bts = txt_id_bts.getText();
-//        String problem = txt_problem.getText();
-//        String solution = txt_solution.getText();
-//        String notes = txt_notes.getText();
-//        String approval = txt_approval.getText();
-//        String finishdate = txt_finishDate.getText();
+        String id = txt_id.getText();
+        String id_user = txt_id_user.getText();
+        String id_bts = txt_id_bts.getText();
+        String problem = txt_problem.getText();
+        String solution = txt_solution.getText();
+        String notes = txt_notes.getText();
         
-//        Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
-        
-        //OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution,notes,approval, finishdate);
-      //  model.update_orderMaintenance(o);
+        OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution, notes, null, null);
+        model.update_orderMaintenance(o);
         clear_form();
-//       setOrderMaintenanceTable(model.getAllOrder());
+        setOrderMaintenanceTable(model.getAllOrder());
     }//GEN-LAST:event_btn_updateActionPerformed
-
-    private void txt_id_btsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_btsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_id_btsActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
         new FormBTS().setVisible(true);
@@ -361,7 +360,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                     "Problem",
                     "Solution",
                     "Notes",
-                    "FinishDate",
+                    "Finish Date",
                     "Approval"
                 }
             );
@@ -374,7 +373,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                 A[3] = o.getProblem();
                 A[4] = o.getSolution();
                 A[5] = o.getNotes();
-                A[7] = o.getfinish_date();
+                A[7] = o.getFinish_date();
                 A[6] = o.getApproval();
                 tableModel.addRow(A);
             }

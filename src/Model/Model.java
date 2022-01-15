@@ -27,7 +27,6 @@ public class Model {
     Koneksi kn = new Koneksi();
     Connection kon = kn.getKoneksi();
     
-    
     public boolean user_login(String username,String password) {
         try {
             Statement stmt = (Statement) kn.getKoneksi().createStatement();
@@ -307,13 +306,14 @@ public class Model {
     
     public void insert_orderMaintenance(OrderMaintenance o) {
         try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO order_maintenance(id_user,id_bts,problem,solution,notes) VALUES (?,?,?,?,?,?)");            
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO order_maintenance(id_user,id_bts,problem,solution,notes) VALUES (?,?,?,?,?)");            
             stmt.setString(1,o.getId_user());
             stmt.setString(2,o.getId_bts());
             stmt.setString(3,o.getProblem());
             stmt.setString(4,o.getSolution());
             stmt.setString(5,o.getNotes());
             stmt.executeUpdate();
+            System.out.println(o.getId_user());
             JOptionPane.showMessageDialog(null,"Insert Order Maintenance Success");
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
