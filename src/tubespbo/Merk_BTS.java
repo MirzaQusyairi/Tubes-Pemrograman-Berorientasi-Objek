@@ -4,12 +4,11 @@ package tubespbo;
 
 public class Merk_BTS {
     private int id;
-    private String name, network;
+    private String name;
     
-    public Merk_BTS(int id, String name, String network){
+    public Merk_BTS(int id, String name){
         this.id = id;
         this.name = name;
-        this.network = network;
     }
     
     public int getId(){
@@ -28,11 +27,9 @@ public class Merk_BTS {
         this.name = name;
     }
     
-    public String getNetwork(){
-        return network;
+    @Override
+    public String toString() {
+        return name;
     }
-    
-    public void setNetwork(String network){
-        this. network = network;
-    }
+   
 }

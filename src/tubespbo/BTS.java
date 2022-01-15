@@ -12,10 +12,11 @@ package tubespbo;
 public class BTS {
     private int id, id_merk;
     private String name, address, city;
+    private Merk_BTS merk;
 
-    public BTS(int id, int id_merk, String name, String address, String city) {
+    public BTS(int id, String name, String address, String city, Merk_BTS merk) {
         this.id = id;
-        this.id_merk = id_merk;
+        this.merk = merk;
         this.name = name;
         this.address = address;
         this.city = city;
@@ -29,13 +30,13 @@ public class BTS {
         this.id = id;
     }
 
-    public int getId_merk() {
-        return id_merk;
-    }
-
-    public void setId_merk(int id_merk) {
-        this.id_merk = id_merk;
-    }
+//    public int getId_merk() {
+//        return id_merk;
+//    }
+//
+//    public void setId_merk(int id_merk) {
+//        this.id_merk = id_merk;
+//    }
 
     public String getName() {
         return name;
@@ -59,6 +60,14 @@ public class BTS {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Merk_BTS getMerk() {
+        return merk;
+    }
+
+    public void setMerk(Merk_BTS merk) {
+        this.merk = merk;
     }
     
     

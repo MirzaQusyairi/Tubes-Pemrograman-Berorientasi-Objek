@@ -7,6 +7,11 @@ package Model;
 
 import View.FormMainMenu;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -112,5 +117,74 @@ public class Model {
         }catch(SQLException sqle){
             System.out.println(sqle);
         }
+    }
+    
+    public void insert_bts(BTS b) {
+        try {
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO bts(name,address,city,id_merkbts) VALUES (?,?,?,?)");            
+            stmt.setString(1,b.getName());
+            stmt.setString(2,b.getAddress());
+            stmt.setString(3,b.getCity());
+            stmt.setInt(4,b.getMerk().getId());
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Insert BTS Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Insert BTS Failed");
+        }
+    }
+    
+    public List<BTS> getAllBTS() {
+        List<BTS> bts = new ArrayList<BTS>();
+        String sql = "SELECT * FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    BTS b = new BTS(
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            new Merk_BTS(rs.getInt(5),rs.getString(7))
+                    );
+                    bts.add(b);
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bts;
+    }
+    
+    public List<Merk_BTS> getAllMerk() {
+        List<Merk_BTS> merk_bts = new ArrayList<Merk_BTS>();
+        String sql = "SELECT * FROM merk_bts";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    Merk_BTS m = new Merk_BTS(
+                            rs.getInt(1),
+                            rs.getString(2)
+                    );
+                    merk_bts.add(m);
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            
+        }
+        
+        return merk_bts; 
     }
 }
