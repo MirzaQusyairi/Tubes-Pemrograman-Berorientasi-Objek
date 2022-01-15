@@ -5,7 +5,7 @@
  */
 package View;
 
-import Model.Model;
+import Controller.Controller;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,11 +17,11 @@ public class FormTechnician extends javax.swing.JFrame {
     /**
      * Creates new form FormAddTechnician
      */
-    Model model = new Model();
+    Controller ctrl = new Controller();
     public FormTechnician() {
         initComponents();
         txt_id.setVisible(false);
-        model.display_technician(tbl_user);
+        ctrl.display_technician(tbl_user);
     }
 
     /**
@@ -255,9 +255,9 @@ public class FormTechnician extends javax.swing.JFrame {
         String teamname = txt_teamname.getText();
         String username = txt_username.getText();
         String password = txt_password.getText();
-        model.insert_technician(name, phone, teamname, username, password);
+        ctrl.insert_technician(name, phone, teamname, username, password);
         clear_form();
-        model.display_technician(tbl_user);
+        ctrl.display_technician(tbl_user);
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
@@ -267,16 +267,16 @@ public class FormTechnician extends javax.swing.JFrame {
         String teamname = txt_teamname.getText();
         String username = txt_username.getText();
         String password = txt_password.getText();
-        model.update_technician(id, name, phone, teamname, username, password);
+        ctrl.update_technician(id, name, phone, teamname, username, password);
         clear_form();
-        model.display_technician(tbl_user);
+        ctrl.display_technician(tbl_user);
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        model.delete_technician(idInt);
+        ctrl.delete_technician(idInt);
         clear_form();
-        model.display_technician(tbl_user);
+        ctrl.display_technician(tbl_user);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed

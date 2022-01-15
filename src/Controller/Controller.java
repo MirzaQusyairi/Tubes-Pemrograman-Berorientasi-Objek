@@ -3,8 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Controller;
 
+import model.BTS;
+import model.User;
+import model.Koneksi;
+import model.Technician;
+import model.Schedule;
+import model.Checklist;
+import model.OrderMaintenance;
+import model.Merk_BTS;
 import View.FormMainMenu;
 import View.FormMainMenuTechnician;
 import java.sql.*;
@@ -16,14 +24,13 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import tubespbo.*;
 import view.*;
 
 /**
  *
  * @author Asus
  */
-public class Model {
+public class Controller {
     Koneksi kn = new Koneksi();
     Connection kon = kn.getKoneksi();
     
@@ -397,74 +404,64 @@ public class Model {
         }
     }
     
-//    public List<Checklist> getAllChecklist() {
-//        List<Checklist> checklist = new ArrayList<Checklist>();
-//        String sql = "SELECT * FROM checklist";
-//        try {
-//            if (kn.getKoneksi()==null){
-//                return null;
-//            }else{
-//                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
-//
-//                ResultSet rs = statement.executeQuery();
-//                while (rs.next()){
-//                    OrderMaintenance o = new OrderMaintenance(
-//                    Checklist c = new Checklist(
-//                            rs.getString(1),
-//                            rs.getString(2),
-//                            rs.getString(3),
-//                            rs.getString(4),
-//                            new OrderMaintenance(rs.getInt(5),rs.getString(7))
-//                    );
-//                    Order.add(o);
-//                            rs.getString(5),
-//                            rs.getString(6),
-//                            rs.getString(7)
-//                            
-//                    );
-//                    checklist.add(c);                    
-//                }
-//                statement.close();
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(OrderMaintenance.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return Order;
-//    }
-//    
-//    
-//    }
-//
-//            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return checklist;
-//    }
-//     public void update_checklist(Checklist c){
-//        try {
-//            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE checklist set id_bts=?,team_name=?,battery=?,genset_fuel=?,grounding=?,date_check=? WHERE id=?");   
-//            stmt.setString(1,c.getId_bts());
-//            stmt.setString(2,c.getTeam_name());
-//            stmt.setString(3,c.getBattery());
-//            stmt.setString(4,c.getGenset_fuel());
-//            stmt.setString(5,c.getGrounding());
-//            stmt.setString(6,c.getDate_check());
-//            stmt.setString(7,c.getID());            
-//            stmt.executeUpdate();
-//            JOptionPane.showMessageDialog(null,"Update Checklist Success");
-//        } catch (SQLException sqle) {
-//            System.out.println(sqle.getMessage());
-//            JOptionPane.showMessageDialog(null,"Update Checklist Failed");
-//        }
-//    }
-//     public void delete_checklist(int id) {
-//        try {
-//            Statement stmt = (Statement) kn.getKoneksi().createStatement();
-//            String sql = "DELETE FROM checklist WHERE id ='"+id+"'";
-//            stmt.executeUpdate(sql);
-//            JOptionPane.showMessageDialog(null,"Delete Checklist Success");
-//        } catch (SQLException sqle) {
-//            System.out.println(sqle.getMessage());
-//            JOptionPane.showMessageDialog(null,"Delete Checklist Failed");
-//        }
-//    }
+    public List<Checklist> getAllChecklist() {
+        List<Checklist> checklist = new ArrayList<Checklist>();
+        String sql = "SELECT * FROM checklist";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    Checklist c = new Checklist(
+                            rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7)
+
+                    );
+                    checklist.add(c);                    
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checklist;
+    }
+    
+    public void update_checklist(Checklist c){
+        try {
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE checklist set id_bts=?,team_name=?,battery=?,genset_fuel=?,grounding=?,date_check=? WHERE id=?");   
+            stmt.setString(1,c.getId_bts());
+            stmt.setString(2,c.getTeam_name());
+            stmt.setString(3,c.getBattery());
+            stmt.setString(4,c.getGenset_fuel());
+            stmt.setString(5,c.getGrounding());
+            stmt.setString(6,c.getDate_check());
+            stmt.setString(7,c.getID());            
+            stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null,"Update Checklist Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Update Checklist Failed");
+        }
+    }
+     
+    public void delete_checklist(int id) {
+        try {
+            Statement stmt = (Statement) kn.getKoneksi().createStatement();
+            String sql = "DELETE FROM checklist WHERE id ='"+id+"'";
+            stmt.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null,"Delete Checklist Success");
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+            JOptionPane.showMessageDialog(null,"Delete Checklist Failed");
+        }
+    }
 }

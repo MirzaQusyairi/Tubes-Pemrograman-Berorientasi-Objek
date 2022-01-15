@@ -5,12 +5,13 @@
  */
 package View;
 
-import Model.Model;
+import model.BTS;
+import model.Merk_BTS;
+import Controller.Controller;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import tubespbo.*;
 
 /**
  *
@@ -21,12 +22,12 @@ public class FormBTS extends javax.swing.JFrame {
     /**
      * Creates new form FormBTS
      */
-    Model model = new Model();
+    Controller ctrl = new Controller();
     public FormBTS() {
         initComponents();
         txt_id.setVisible(false);
-        setMerk(model.getAllMerk());
-        setBTSTable(model.getAllBTS());
+        setMerk(ctrl.getAllMerk());
+        setBTSTable(ctrl.getAllBTS());
     }
 
     /**
@@ -220,9 +221,9 @@ public class FormBTS extends javax.swing.JFrame {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        model.delete_bts(idInt);
+        ctrl.delete_bts(idInt);
         clear_form();
-        setBTSTable(model.getAllBTS());
+        setBTSTable(ctrl.getAllBTS());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -232,9 +233,9 @@ public class FormBTS extends javax.swing.JFrame {
         Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
         
         BTS b = new BTS(null, name, address, city, merk);
-        model.insert_bts(b);
+        ctrl.insert_bts(b);
         clear_form();
-        setBTSTable(model.getAllBTS());
+        setBTSTable(ctrl.getAllBTS());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_btsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_btsMouseClicked
@@ -261,9 +262,9 @@ public class FormBTS extends javax.swing.JFrame {
         Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
         
         BTS b = new BTS(id, name, address, city, merk);
-        model.update_bts(b);
+        ctrl.update_bts(b);
         clear_form();
-        setBTSTable(model.getAllBTS());
+        setBTSTable(ctrl.getAllBTS());
     }//GEN-LAST:event_btn_updateActionPerformed
     
     private void clear_form(){

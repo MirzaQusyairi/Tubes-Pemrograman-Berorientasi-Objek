@@ -7,13 +7,14 @@ package View;
  */
 
 
+import model.Checklist;
+import model.Merk_BTS;
 import View.*;
-import Model.Model;
+import Controller.Controller;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import tubespbo.*;
 
 /**
  *
@@ -24,14 +25,11 @@ public class FormChecklist extends javax.swing.JFrame {
     /**
      * Creates new form FormBTS
      */
-    Model model = new Model();
+    Controller ctrl = new Controller();
     public FormChecklist() {
         initComponents();
         txt_id.setVisible(false);
-      //  setChecklistTable(model.getAllChecklist());
-//        setMerk(model.getAllMerk());
-//        setBTSTable(model.getAllBTS());
-
+        setChecklistTable(ctrl.getAllChecklist());
     }
 
     /**
@@ -279,9 +277,9 @@ public class FormChecklist extends javax.swing.JFrame {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-       // model.delete_checklist(idInt);
+        ctrl.delete_checklist(idInt);
         clear_form();
-       // setChecklistTable(model.getAllChecklist());
+        setChecklistTable(ctrl.getAllChecklist());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -292,11 +290,10 @@ public class FormChecklist extends javax.swing.JFrame {
         String grounding =(String) txt_grounding.getSelectedItem();
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         
-              
         Checklist c = new Checklist(null,id_bts,team_name,battery,genset_fuel,grounding,tanggal);
-        model.insert_checklist(c);
+        ctrl.insert_checklist(c);
         clear_form();
-       // setChecklistTable(model.getAllChecklist());
+        setChecklistTable(ctrl.getAllChecklist());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_checklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_checklistMouseClicked
@@ -335,18 +332,18 @@ public class FormChecklist extends javax.swing.JFrame {
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         
         Checklist c = new Checklist(id,id_bts,team_name,battery,genset_fuel,grounding,tanggal);
-//        model.update_checklist(c);
-//        clear_form();
-//        setChecklistTable(model.getAllChecklist());
+        ctrl.update_checklist(c);
+        clear_form();
+        setChecklistTable(ctrl.getAllChecklist());
     }//GEN-LAST:event_btn_updateActionPerformed
     
     private void clear_form(){
         txt_id.setText("");
         txt_id_bts.setText("");
         txt_team_name.setText("");
-        txt_battery.setSelectedItem("");
-        txt_genset_fuel.setSelectedItem("");
-        txt_grounding.setSelectedItem("");
+        txt_battery.setSelectedIndex(0);
+        txt_genset_fuel.setSelectedIndex(0);
+        txt_grounding.setSelectedIndex(0);
         txt_hari.setSelectedIndex(0);
         txt_bulan.setSelectedIndex(0);
         txt_tahun.setSelectedIndex(0);
@@ -386,14 +383,6 @@ public class FormChecklist extends javax.swing.JFrame {
             //tbl_bts.getColumnModel().getColumn(0).setMinWidth(120);
             //tbl_bts.getColumnModel().getColumn(2).setMaxWidth(50);
         }
-    }
-        
-    private void setMerk(List<Merk_BTS> merk){    
-//        if (merk==null){
-//            JOptionPane.showMessageDialog(this, "Failed get MerkBTS data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
-//        }else{
-//            txt_merk.setModel(new DefaultComboBoxModel(merk.toArray()));
-//        }
     }
     
     /**

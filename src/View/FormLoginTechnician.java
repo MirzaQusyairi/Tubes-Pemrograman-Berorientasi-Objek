@@ -5,7 +5,7 @@
  */
 package View;
 
-import Model.Model;
+import Controller.Controller;
 
 /**
  *
@@ -16,7 +16,7 @@ public class FormLoginTechnician extends javax.swing.JFrame {
     /**
      * Creates new form FormLogin
      */
-    Model model = new Model();
+    Controller ctrl = new Controller();
     public FormLoginTechnician() {
         initComponents();
     }
@@ -122,7 +122,7 @@ public class FormLoginTechnician extends javax.swing.JFrame {
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
         String username = txt_username.getText();
         String password = new String(txt_password.getPassword());
-        boolean status = model.tech_login(username, password);
+        boolean status = ctrl.tech_login(username, password);
         if (status) {
             this.dispose();
         }

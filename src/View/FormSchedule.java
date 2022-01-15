@@ -5,12 +5,12 @@
  */
 package View;
 
-import Model.Model;
+import model.Schedule;
+import Controller.Controller;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import tubespbo.*;
 
 /**
  *
@@ -21,7 +21,7 @@ public class FormSchedule extends javax.swing.JFrame {
     /**
      * Creates new form FormBTS
      */
-    Model model = new Model();
+    Controller model = new Controller();
     public FormSchedule() {
         initComponents();
         txt_id.setVisible(false);

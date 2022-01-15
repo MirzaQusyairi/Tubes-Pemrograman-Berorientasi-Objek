@@ -5,12 +5,13 @@
  */
 package View;
 
-import Model.Model;
+import model.User;
+import model.OrderMaintenance;
+import Controller.Controller;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import tubespbo.*;
 
 /**
  *
@@ -22,7 +23,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
      * Creates new form FormBTS
      */
     private User user_info;
-    Model model = new Model();
+    Controller ctrl = new Controller();
     public FormOrderMaintenance() {
         initComponents();
     }
@@ -33,7 +34,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         txt_id_user.setText(Integer.toString(user_info.getId()));
         txt_id.setVisible(false);
         txt_id_user.setVisible(false);
-        setOrderMaintenanceTable(model.getAllOrder());
+        setOrderMaintenanceTable(ctrl.getAllOrder());
     }
 
     public User getUser_info() {
@@ -282,9 +283,9 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        model.delete_orderMaintenance(idInt);
+        ctrl.delete_orderMaintenance(idInt);
         clear_form();
-        setOrderMaintenanceTable(model.getAllOrder());
+        setOrderMaintenanceTable(ctrl.getAllOrder());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -295,9 +296,9 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         String notes = txt_notes.getText();
         
         OrderMaintenance o = new OrderMaintenance(null, id_user, id_bts, problem, solution, notes, null, null);
-        model.insert_orderMaintenance(o);
+        ctrl.insert_orderMaintenance(o);
         clear_form();
-        setOrderMaintenanceTable(model.getAllOrder());
+        setOrderMaintenanceTable(ctrl.getAllOrder());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_orderMouseClicked
@@ -329,9 +330,9 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         String notes = txt_notes.getText();
         
         OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution, notes, null, null);
-        model.update_orderMaintenance(o);
+        ctrl.update_orderMaintenance(o);
         clear_form();
-        setOrderMaintenanceTable(model.getAllOrder());
+        setOrderMaintenanceTable(ctrl.getAllOrder());
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
