@@ -163,7 +163,7 @@ public class Model {
     }
     public void insert_schedule(Schedule s) {
          try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts_date,status) VALUES (?,?,?,?)");            
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?,?)");            
             stmt.setString(1,s.getDate_schedule());
             stmt.setString(2,s.getStatus());
             stmt.setString(3,s.getId_bts());
