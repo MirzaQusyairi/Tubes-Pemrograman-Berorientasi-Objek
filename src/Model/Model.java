@@ -278,6 +278,7 @@ public class Model {
         
         return merk_bts; 
     }
+<<<<<<< Updated upstream
     
     public void insert_checklist(Checklist c) {
         try {
@@ -352,5 +353,14 @@ public class Model {
             System.out.println(sqle.getMessage());
             JOptionPane.showMessageDialog(null,"Delete Checklist Failed");
         }
+=======
+
+    public void insert_schedule(String date_now, String status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void insert_schedule(String id_bts, String date_now, String status) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> Stashed changes
     }
 }
