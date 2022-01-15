@@ -28,7 +28,7 @@ public class FormChecklist extends javax.swing.JFrame {
     public FormChecklist() {
         initComponents();
         txt_id.setVisible(false);
-        setChecklistTable(model.getAllChecklist());
+      //  setChecklistTable(model.getAllChecklist());
 //        setMerk(model.getAllMerk());
 //        setBTSTable(model.getAllBTS());
 
@@ -285,9 +285,9 @@ public class FormChecklist extends javax.swing.JFrame {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        model.delete_checklist(idInt);
+       // model.delete_checklist(idInt);
         clear_form();
-        setChecklistTable(model.getAllChecklist());
+       // setChecklistTable(model.getAllChecklist());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -302,7 +302,7 @@ public class FormChecklist extends javax.swing.JFrame {
         Checklist c = new Checklist(null,id_bts,team_name,battery,genset_fuel,grounding,tanggal);
         model.insert_checklist(c);
         clear_form();
-        setChecklistTable(model.getAllChecklist());
+       // setChecklistTable(model.getAllChecklist());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_checklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_checklistMouseClicked
@@ -343,9 +343,9 @@ public class FormChecklist extends javax.swing.JFrame {
         
         
         Checklist c = new Checklist(id,id_bts,team_name,battery,genset_fuel,grounding,tanggal);
-        model.update_checklist(c);
-        clear_form();
-        setChecklistTable(model.getAllChecklist());
+//        model.update_checklist(c);
+//        clear_form();
+//        setChecklistTable(model.getAllChecklist());
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void txt_team_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_team_nameActionPerformed

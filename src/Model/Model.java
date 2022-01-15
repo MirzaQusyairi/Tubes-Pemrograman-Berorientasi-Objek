@@ -226,6 +226,7 @@ public class Model {
         }
         return bts;
     }
+    
     public List<BTS> getAllSchedule() {
         List<BTS> bts = new ArrayList<BTS>();
         String sql = "SELECT * FROM schedule INNER JOIN bts ON bts.id=bts.id_bts";
@@ -253,6 +254,7 @@ public class Model {
         }
         return bts;
     }
+    
     public List<Merk_BTS> getAllMerk() {
         List<Merk_BTS> merk_bts = new ArrayList<Merk_BTS>();
         String sql = "SELECT * FROM merk_bts";
@@ -278,58 +280,83 @@ public class Model {
         
         return merk_bts; 
     }
+    
     public void insert_orderMaintenance(OrderMaintenance o) {
         try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO OrderMaintenance(id,id_user,id_bts,problem,solution,notes,approval,finish_date) VALUES (?,?,?,?)");            
-            stmt.setInt(1,o.getId());
-            stmt.setInt(2,o.getId_user());
-            stmt.setInt(3,o.getId_bts());
-            stmt.setString(4,o.getProblem);
-            stmt.setString(5,o.getSolution);
-            stmt.setString(5,o.getNotes);
-            stmt.setString(6,o.getApproval);
-            stmt.setInt(4,o.getfinish_date);
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO order_maintenance(id_user,id_bts,problem,solution,notes) VALUES (?,?,?,?,?,?)");            
+            stmt.setString(1,o.getId_user());
+            stmt.setString(2,o.getId_bts());
+            stmt.setString(3,o.getProblem());
+            stmt.setString(4,o.getSolution());
+            stmt.setString(5,o.getNotes());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Insert OrderMaintenance Success");
+            JOptionPane.showMessageDialog(null,"Insert Order Maintenance Success");
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"Insert OrderMaintenance Failed");
+            JOptionPane.showMessageDialog(null,"Insert Order Maintenance Failed");
         }
     }
     
     public void update_orderMaintenance(OrderMaintenance o){
         try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE OrderMaintenance set id_user = ? ,id_bts = ?,problem = ?,solution = ?,notes = ?,approval = ?,finish_date = ? WHERE id=?");   
-            stmt.setInt(1,o.getId());
-            stmt.setInt(2,o.getId_user());
-            stmt.setInt(3,o.getId_bts());
-            stmt.setString(4,o.getProblem);
-            stmt.setString(5,o.getSolution);
-            stmt.setString(5,o.getNotes);
-            stmt.setString(6,o.getApproval);
-            stmt.setInt(7,o.getfinish_date);
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE order_maintenance set id_user = ?, id_bts = ?, problem = ?, solution = ?, notes = ? WHERE id=?");   
+            stmt.setString(1,o.getId_user());
+            stmt.setString(2,o.getId_bts());
+            stmt.setString(3,o.getProblem());
+            stmt.setString(4,o.getSolution());
+            stmt.setString(5,o.getNotes());
+            stmt.setString(6,o.getId());
             stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Update OrderMaientenance Success");
+            JOptionPane.showMessageDialog(null,"Update Order Maintenance Success");
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"OrderMaientenance Failed");
+            JOptionPane.showMessageDialog(null,"Update Order Maintenance Failed");
         }
     }
-    public void delete_OrderMaintenance(int id) {
+    
+    public void delete_orderMaintenance(int id) {
         try {
             Statement stmt = (Statement) kn.getKoneksi().createStatement();
-            String sql = "DELETE FROM OrderMaintenance WHERE id ='"+id+"'";
+            String sql = "DELETE FROM order_maintenance WHERE id ='"+id+"'";
             stmt.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null,"Delete OrderMaintenance Success");
+            JOptionPane.showMessageDialog(null,"Delete Order Maintenance Success");
         } catch (SQLException sqle) {
             System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"Delete OrderMaintenance Failed");
+            JOptionPane.showMessageDialog(null,"Delete Order Maintenance Failed");
         }
-    
     }
+    
     public List<OrderMaintenance> getAllOrder() {
-        List<OrderMaintenance> Order = new ArrayList<OrderMaintenance>();
-        String sql = "SELECT * FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts";
+        List<OrderMaintenance> order = new ArrayList<OrderMaintenance>();
+        String sql = "SELECT * FROM order_maintenance";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    OrderMaintenance o = new OrderMaintenance(
+                            rs.getString(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            rs.getString(5),
+                            rs.getString(6),
+                            rs.getString(7),
+                            rs.getString(8)
+                    );
+                    order.add(o);
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OrderMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return order;
+    }
+
     
     public void insert_checklist(Checklist c) {
         try {
@@ -347,74 +374,75 @@ public class Model {
             JOptionPane.showMessageDialog(null,"Insert checklist Failed");
         }
     }
-    public List<Checklist> getAllChecklist() {
-        List<Checklist> checklist = new ArrayList<Checklist>();
-        String sql = "SELECT * FROM checklist";
-        try {
-            if (kn.getKoneksi()==null){
-                return null;
-            }else{
-                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
-
-                ResultSet rs = statement.executeQuery();
-                while (rs.next()){
-                    OrderMaintenance o = new OrderMaintenance(
-                    Checklist c = new Checklist(
-                            rs.getString(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            new OrderMaintenance(rs.getInt(5),rs.getString(7))
-                    );
-                    Order.add(o);
-                            rs.getString(5),
-                            rs.getString(6),
-                            rs.getString(7)
-                            
-                    );
-                    checklist.add(c);                    
-                }
-                statement.close();
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(OrderMaintenance.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return Order;
-    }
     
-    
-    }
-
-            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return checklist;
-    }
-     public void update_checklist(Checklist c){
-        try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE checklist set id_bts=?,team_name=?,battery=?,genset_fuel=?,grounding=?,date_check=? WHERE id=?");   
-            stmt.setString(1,c.getId_bts());
-            stmt.setString(2,c.getTeam_name());
-            stmt.setString(3,c.getBattery());
-            stmt.setString(4,c.getGenset_fuel());
-            stmt.setString(5,c.getGrounding());
-            stmt.setString(6,c.getDate_check());
-            stmt.setString(7,c.getID());            
-            stmt.executeUpdate();
-            JOptionPane.showMessageDialog(null,"Update Checklist Success");
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"Update Checklist Failed");
-        }
-    }
-     public void delete_checklist(int id) {
-        try {
-            Statement stmt = (Statement) kn.getKoneksi().createStatement();
-            String sql = "DELETE FROM checklist WHERE id ='"+id+"'";
-            stmt.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null,"Delete Checklist Success");
-        } catch (SQLException sqle) {
-            System.out.println(sqle.getMessage());
-            JOptionPane.showMessageDialog(null,"Delete Checklist Failed");
-        }
-    }
+//    public List<Checklist> getAllChecklist() {
+//        List<Checklist> checklist = new ArrayList<Checklist>();
+//        String sql = "SELECT * FROM checklist";
+//        try {
+//            if (kn.getKoneksi()==null){
+//                return null;
+//            }else{
+//                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+//
+//                ResultSet rs = statement.executeQuery();
+//                while (rs.next()){
+//                    OrderMaintenance o = new OrderMaintenance(
+//                    Checklist c = new Checklist(
+//                            rs.getString(1),
+//                            rs.getString(2),
+//                            rs.getString(3),
+//                            rs.getString(4),
+//                            new OrderMaintenance(rs.getInt(5),rs.getString(7))
+//                    );
+//                    Order.add(o);
+//                            rs.getString(5),
+//                            rs.getString(6),
+//                            rs.getString(7)
+//                            
+//                    );
+//                    checklist.add(c);                    
+//                }
+//                statement.close();
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(OrderMaintenance.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return Order;
+//    }
+//    
+//    
+//    }
+//
+//            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return checklist;
+//    }
+//     public void update_checklist(Checklist c){
+//        try {
+//            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE checklist set id_bts=?,team_name=?,battery=?,genset_fuel=?,grounding=?,date_check=? WHERE id=?");   
+//            stmt.setString(1,c.getId_bts());
+//            stmt.setString(2,c.getTeam_name());
+//            stmt.setString(3,c.getBattery());
+//            stmt.setString(4,c.getGenset_fuel());
+//            stmt.setString(5,c.getGrounding());
+//            stmt.setString(6,c.getDate_check());
+//            stmt.setString(7,c.getID());            
+//            stmt.executeUpdate();
+//            JOptionPane.showMessageDialog(null,"Update Checklist Success");
+//        } catch (SQLException sqle) {
+//            System.out.println(sqle.getMessage());
+//            JOptionPane.showMessageDialog(null,"Update Checklist Failed");
+//        }
+//    }
+//     public void delete_checklist(int id) {
+//        try {
+//            Statement stmt = (Statement) kn.getKoneksi().createStatement();
+//            String sql = "DELETE FROM checklist WHERE id ='"+id+"'";
+//            stmt.executeUpdate(sql);
+//            JOptionPane.showMessageDialog(null,"Delete Checklist Success");
+//        } catch (SQLException sqle) {
+//            System.out.println(sqle.getMessage());
+//            JOptionPane.showMessageDialog(null,"Delete Checklist Failed");
+//        }
+//    }
 }

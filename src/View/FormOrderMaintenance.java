@@ -25,8 +25,8 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
     public FormOrderMaintenance() {
         initComponents();
         txt_id.setVisible(false);
-//        setMerk(model.getAllMerk());
-//        setOrderMaintenanceTable(model.getAllOrder());
+        txt_id_user.setVisible(false);
+        setOrderMaintenanceTable(model.getAllOrder());
     }
 
     /**
@@ -43,25 +43,24 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txt_notes = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_order = new javax.swing.JTable();
         btn_insert = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         btn_update = new javax.swing.JButton();
-        txt_problem = new javax.swing.JTextField();
         btn_delete = new javax.swing.JButton();
         txt_id = new javax.swing.JLabel();
-        txt_solution = new javax.swing.JTextField();
         btn_clear = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        txt_idUser = new javax.swing.JTextField();
+        txt_id_user = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        txt_finishDate = new javax.swing.JTextField();
-        txt_approval = new javax.swing.JTextField();
-        txt_idBts = new javax.swing.JTextField();
+        txt_id_bts = new javax.swing.JTextField();
+        btn_search = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_solution = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txt_notes = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txt_problem = new javax.swing.JTextArea();
 
         txt_merk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -78,23 +77,23 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(197, 197, 197)
+                .addGap(222, 222, 222)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel3.setText("id bts");
+        jLabel3.setText("ID BTS");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel4.setText("problem");
+        jLabel4.setText("Solution");
 
         tbl_order.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,7 +119,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel6.setText("solution");
+        jLabel6.setText("Notes");
 
         btn_update.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btn_update.setText("Update");
@@ -149,35 +148,36 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel2.setText("id user");
+        txt_id_user.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_id_user.setText("id user");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setText("notes");
+        jLabel5.setText("Problem");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("finish date");
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel8.setText("approval");
-
-        txt_finishDate.addActionListener(new java.awt.event.ActionListener() {
+        txt_id_bts.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_finishDateActionPerformed(evt);
+                txt_id_btsActionPerformed(evt);
             }
         });
 
-        txt_approval.addActionListener(new java.awt.event.ActionListener() {
+        btn_search.setText("Search");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_approvalActionPerformed(evt);
+                btn_searchActionPerformed(evt);
             }
         });
 
-        txt_idBts.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idBtsActionPerformed(evt);
-            }
-        });
+        txt_solution.setColumns(20);
+        txt_solution.setRows(5);
+        jScrollPane2.setViewportView(txt_solution);
+
+        txt_notes.setColumns(20);
+        txt_notes.setRows(5);
+        jScrollPane3.setViewportView(txt_notes);
+
+        txt_problem.setColumns(20);
+        txt_problem.setRows(5);
+        jScrollPane4.setViewportView(txt_problem);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -185,85 +185,74 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txt_finishDate, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(txt_id)
-                        .addComponent(jScrollPane1)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txt_notes, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jLabel3)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(txt_idBts, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                            .addComponent(jLabel2)
-                                            .addGap(18, 18, 18)
-                                            .addComponent(txt_idUser, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txt_solution, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txt_problem, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_approval, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txt_id_user))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
+                            .addComponent(txt_id_bts))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txt_id)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(txt_problem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_idUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel6)
-                    .addComponent(txt_solution, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_idBts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel8)
-                    .addComponent(txt_notes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_approval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txt_finishDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                    .addComponent(txt_id)
+                    .addComponent(txt_id_user))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_id_bts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_search))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane4)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -271,7 +260,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                     .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGap(111, 111, 111))
         );
 
         pack();
@@ -284,25 +273,22 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        model.delete_OrderMaintenance(idInt);
+        //model.delete_OrderMaintenance(idInt);
         clear_form();
 //        setOrderMaintenanceTable(model.getAllOrder());
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String id = txt_id.getText();
-        String id_user = txt_id.getText();
-        String id_bts = txt_idBts.getText();
+        String id_user = txt_id_user.getText();
+        String id_bts = txt_id_bts.getText();
         String problem = txt_problem.getText();
         String solution = txt_solution.getText();
         String notes = txt_notes.getText();
-        String approval = txt_approval.getText();
-        String finishdate = txt_finishDate.getText();
         
-//        OrderMaintenance o = new OrderMaintenance(null, id_user, id_bts, problem, solution,notes,approval, finishdate);
-//        model.insert_orderMaintenance(o);
-//        clear_form();
-////        setOrderMaintenanceTable(model.getAllOrder());
+        OrderMaintenance o = new OrderMaintenance(null, id_user, id_bts, problem, solution, notes, null, null);
+        model.insert_orderMaintenance(o);
+        clear_form();
+        setOrderMaintenanceTable(model.getAllOrder());
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_orderMouseClicked
@@ -317,72 +303,66 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         String tbl_approval = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),6);
         String tbl_finishdate = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),7);
         
-        txt_id.setText(tbl_id);
-        txt_idBts.setText(tbl_id_user);
-        txt_idUser.setText(tbl_id_bts);
-        txt_problem.setText(tbl_problem);
-        txt_solution.setText(tbl_solution);
-        txt_notes.setText(tbl_notes);
-        txt_approval.setText(tbl_approval);
-        txt_finishDate.setText(tbl_finishdate);
+//        txt_id.setText(tbl_id);
+//        txt_id_bts.setText(tbl_id_user);
+//        txt_idUser.setText(tbl_id_bts);
+//        txt_problem.setText(tbl_problem);
+//        txt_solution.setText(tbl_solution);
+//        txt_notes.setText(tbl_notes);
+//        txt_approval.setText(tbl_approval);
+//        txt_finishDate.setText(tbl_finishdate);
     }//GEN-LAST:event_tbl_orderMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String id = txt_id.getText();
-        String id_user = txt_id.getText();
-        String id_bts = txt_idBts.getText();
-        String problem = txt_problem.getText();
-        String solution = txt_solution.getText();
-        String notes = txt_notes.getText();
-        String approval = txt_approval.getText();
-        String finishdate = txt_finishDate.getText();
+//        String id = txt_id.getText();
+//        String id_user = txt_id.getText();
+//        String id_bts = txt_id_bts.getText();
+//        String problem = txt_problem.getText();
+//        String solution = txt_solution.getText();
+//        String notes = txt_notes.getText();
+//        String approval = txt_approval.getText();
+//        String finishdate = txt_finishDate.getText();
         
 //        Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
         
-        OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution,notes,approval, finishdate);
-        model.update_orderMaintenance(o);
+        //OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution,notes,approval, finishdate);
+      //  model.update_orderMaintenance(o);
         clear_form();
 //       setOrderMaintenanceTable(model.getAllOrder());
     }//GEN-LAST:event_btn_updateActionPerformed
 
-    private void txt_finishDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_finishDateActionPerformed
+    private void txt_id_btsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_id_btsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_finishDateActionPerformed
+    }//GEN-LAST:event_txt_id_btsActionPerformed
 
-    private void txt_approvalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_approvalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_approvalActionPerformed
-
-    private void txt_idBtsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idBtsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idBtsActionPerformed
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        new FormBTS().setVisible(true);
+    }//GEN-LAST:event_btn_searchActionPerformed
     
     private void clear_form(){
         txt_id.setText("");
-        txt_idBts.setText("");
-        txt_idUser.setText("");
+        txt_id_bts.setText("");
+        txt_id_user.setText("");
         txt_problem.setText("");
         txt_solution.setText("");
         txt_notes.setText("");
-        txt_approval.setText("");
-        txt_finishDate.setText("");
     }
     
     private void setOrderMaintenanceTable(List<OrderMaintenance> listOrder) {
         if (listOrder==null){
-            JOptionPane.showMessageDialog(this, "Failed get OrderMaintenance data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Failed get Order Maintenance data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
         }else{
             DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.setColumnIdentifiers(
                 new String[] {
                     "ID",
-                    "ID_User",
-                    "ID_BTS",
-                    "problem",
+                    "ID User",
+                    "ID BTS",
+                    "Problem",
                     "Solution",
                     "Notes",
-                    "Approval",
-                    "FinishDate"
+                    "FinishDate",
+                    "Approval"
                 }
             );
 
@@ -394,23 +374,14 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                 A[3] = o.getProblem();
                 A[4] = o.getSolution();
                 A[5] = o.getNotes();
-                A[6] = o.getApproval();
                 A[7] = o.getfinish_date();
-//                A[4] = o.getMerk().getName();
+                A[6] = o.getApproval();
                 tableModel.addRow(A);
             }
             //tbl_bts.setAutoResizeMode( javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS );
             tbl_order.setModel(tableModel);
             //tbl_bts.getColumnModel().getColumn(0).setMinWidth(120);
             //tbl_bts.getColumnModel().getColumn(2).setMaxWidth(50);
-        }
-    }
-        
-    private void setMerk(List<Merk_BTS> merk){    
-        if (merk==null){
-            JOptionPane.showMessageDialog(this, "Failed get MerkBTS data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
-        }else{
-            txt_merk.setModel(new DefaultComboBoxModel(merk.toArray()));
         }
     }
     
@@ -460,26 +431,25 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_insert;
+    private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable tbl_order;
-    private javax.swing.JTextField txt_approval;
-    private javax.swing.JTextField txt_finishDate;
     private javax.swing.JLabel txt_id;
-    private javax.swing.JTextField txt_idBts;
-    private javax.swing.JTextField txt_idUser;
+    private javax.swing.JTextField txt_id_bts;
+    private javax.swing.JLabel txt_id_user;
     private javax.swing.JComboBox<String> txt_merk;
-    private javax.swing.JTextField txt_notes;
-    private javax.swing.JTextField txt_problem;
-    private javax.swing.JTextField txt_solution;
+    private javax.swing.JTextArea txt_notes;
+    private javax.swing.JTextArea txt_problem;
+    private javax.swing.JTextArea txt_solution;
     // End of variables declaration//GEN-END:variables
 }
