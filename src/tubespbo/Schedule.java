@@ -5,31 +5,35 @@ import java.time.LocalDate;
 
 
 public class Schedule {
-    private int id;
-    private int id_bts;
+    private String id;
+    private String id_bts;
     private String date_schedule;
     private String status;
     
-    public Schedule(int id, int id_bts, String date_schedule, String status){
+    public Schedule(String id, String id_bts, String date_schedule, String status){
         this.id = id;
         this.id_bts = id_bts;
         this.date_schedule = date_schedule;
         this.status = status;
         
     }
-    public int getId(){
+
+    public Schedule(String string, String string0, String string1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public String getId(){
         return id ;
     }
     
-    public void setId(int id){
+    public void setId(String id){
         this.id = id ;
     }
     
-    public int getId_bts(){
+    public String getId_bts(){
         return id_bts;
     }
     
-    public void setId_bts(int id_bts){
+    public void setId_bts(String id_bts){
         this.id_bts = id_bts ;
     }
     

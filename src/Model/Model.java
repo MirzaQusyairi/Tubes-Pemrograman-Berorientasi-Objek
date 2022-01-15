@@ -186,10 +186,10 @@ public class Model {
     }
     public void insert_schedule(Schedule s) {
          try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(date,status,id_bts) VALUES (?,?,?,?)");            
-            stmt.setString(1,s.getDate_schedule());
-            stmt.setString(2,s.getStatus());
-           
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?)");            
+            stmt.setString(1,s.getId_bts());
+            stmt.setString(2,s.getDate_schedule());
+            stmt.setString(3,s.getStatus());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Insert Schedule Success");
         } catch (SQLException sqle) {
@@ -202,7 +202,7 @@ public class Model {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE schedule set date=?,status=?,id_bts=? WHERE id=?");   
             stmt.setString(1,s.getDate_schedule());
             stmt.setString(2,s.getStatus());
-            stmt.setInt(3,s.getId());
+            stmt.setString(3,s.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Schedule Success");
         } catch (SQLException sqle) {
@@ -249,10 +249,9 @@ public class Model {
         }
         return bts;
     }
-    
-    public List<BTS> getAllSchedule() {
-        List<BTS> bts = new ArrayList<BTS>();
-        String sql = "SELECT * FROM schedule INNER JOIN bts ON bts.id=bts.id_bts";
+    public List<Schedule> getAllSchedule() {
+        List<Schedule> schedule = new ArrayList<Schedule>();
+                String sql = "SELECT * FROM schedule";
         try {
             if (kn.getKoneksi()==null){
                 return null;
@@ -261,21 +260,19 @@ public class Model {
 
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
-                    BTS b = new BTS(
+                    Schedule s = new Schedule(
                             rs.getString(1),
                             rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            new Merk_BTS(rs.getInt(5),rs.getString(7))
+                            rs.getString(3)
                     );
-                    bts.add(b);
+                    schedule.add(s);                    
                 }
                 statement.close();
             }
         } catch (Exception ex) {
             Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return bts;
+        return schedule;
     }
     
     public List<Merk_BTS> getAllMerk() {
@@ -349,6 +346,7 @@ public class Model {
             JOptionPane.showMessageDialog(null,"Delete Order Maintenance Failed");
         }
     }
+
     
     public List<OrderMaintenance> getAllOrder() {
         List<OrderMaintenance> order = new ArrayList<OrderMaintenance>();
