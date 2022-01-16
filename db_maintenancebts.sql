@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 16, 2022 at 06:06 AM
+-- Generation Time: Jan 16, 2022 at 04:55 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.26
 
@@ -65,7 +65,8 @@ CREATE TABLE `checklist` (
 --
 
 INSERT INTO `checklist` (`id`, `id_maintenance`, `id_technician`, `battery`, `genset_fuel`, `grounding`, `date_check`) VALUES
-(5, 13, 1, 'Baik', 'Penuh', 'Baik', '2023-3-4');
+(5, 13, 2, 'Baik', 'Penuh', 'Baik', '2023-3-4'),
+(8, 16, 3, 'Lemah', 'Habis', 'Hilang', '2022-1-27');
 
 -- --------------------------------------------------------
 
@@ -109,7 +110,8 @@ CREATE TABLE `order_maintenance` (
 
 INSERT INTO `order_maintenance` (`id`, `id_user`, `id_bts`, `problem`, `solution`, `notes`, `finish_date`, `approval`) VALUES
 (10, 1, 8, '- Gangguan koneksi 4G\n- Baterai lemah', '-', '-', '-', NULL),
-(13, 1, 7, '- Genset Mati\n- Jaringan bermasalah', 'Perbaiki receiver', '-', '2022-1-16', NULL);
+(13, 1, 7, '- Genset Mati\n- Jaringan bermasalah', 'Perbaiki receiver', '-', '2022-1-15', NULL),
+(16, 1, 1, 'Gangguan sudah 2 hari', '-', '-', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -234,13 +236,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bts`
 --
 ALTER TABLE `bts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `checklist`
 --
 ALTER TABLE `checklist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `merk_bts`
@@ -252,19 +254,19 @@ ALTER TABLE `merk_bts`
 -- AUTO_INCREMENT for table `order_maintenance`
 --
 ALTER TABLE `order_maintenance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `technician`
 --
 ALTER TABLE `technician`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
