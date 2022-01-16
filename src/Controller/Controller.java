@@ -473,7 +473,7 @@ public class Controller {
     
     public List<Report> getReport() {
         List<Report> report = new ArrayList<Report>();
-        String sql = "SELECT * FROM order_maintenance JOIN checklist ON order_maintenance.id=checklist.id_maintenance JOIN bts ON order_maintenance.id_bts=bts.id";
+        String sql = "SELECT * FROM order_maintenance JOIN checklist ON order_maintenance.id=checklist.id_maintenance JOIN bts ON order_maintenance.id_bts=bts.id JOIN merk_bts ON bts.id_merkbts=merk_bts.id JOIN technician ON checklist.id_technician=technician.id";
         try {
             
             if (kn.getKoneksi()==null){
@@ -483,16 +483,15 @@ public class Controller {
 
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
-                    Merk_BTS merk = new Merk_BTS(rs.getInt(15),null);
-                    System.out.println(rs.getString(15));
-//                    Report r = new Report(
-//                            
-//                            new OrderMaintenance(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)),
-//                            new Checklist(rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15)),
-//                            new BTS(rs.getInt(16),rs.getString(17),rs.getString(18),rs.getString(19),merk),
-//                            new Technician(0,null,null,null,null,null)
-//                    );
-//                    report.add(r);
+                    Merk_BTS merk = new Merk_BTS(rs.getInt(20),rs.getString(22));
+                    Report r = new Report(
+                            new OrderMaintenance(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)),
+                            new Checklist(rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15)),
+                            new BTS(rs.getInt(16),rs.getString(17),rs.getString(18),rs.getString(19),merk),
+                            //new Technician(0,null,null,null,null,null)
+                            new Technician(rs.getInt(23),rs.getString(24),rs.getString(25),rs.getString(26),rs.getString(27),rs.getString(28))
+                    );
+                    report.add(r);
                 }
                 statement.close();
             }

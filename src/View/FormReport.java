@@ -55,16 +55,16 @@ public class FormReport extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(475, 475, 475)
+                .addGap(742, 742, 742)
                 .addComponent(jLabel1)
-                .addContainerGap(1067, Short.MAX_VALUE))
+                .addContainerGap(800, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(26, 26, 26))
         );
 
         tbl_report.setModel(new javax.swing.table.DefaultTableModel(
@@ -107,19 +107,33 @@ public class FormReport extends javax.swing.JFrame {
             DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.setColumnIdentifiers(
                 new String[] {
+                    "Tanggal Pengecekan",
+                    "Nama Team Teknisi",
                     "Nama BTS",
+                    "Jaringan",
+                    "Lokasi",
                     "Masalah",
                     "Solusi",
-                    "Catatan"
+                    "Catatan",
+                    "Baterai",
+                    "Grounding",
+                    "BBM Genset"
                 }
             );
 
             for (Report r : report) {
-                Object[] o = new Object[4];
-                o[0] = r.getBts().getName();
-                o[1] = r.getOrder().getProblem();
-                o[2] = r.getOrder().getSolution();
-                o[3] = r.getOrder().getNotes();
+                Object[] o = new Object[11];
+                o[0] = r.getChecklist().getDate_check();
+                o[1] = r.getTechnician().getteam_name();
+                o[2] = r.getBts().getName();
+                o[3] = r.getBts().getMerk().getName();
+                o[4] = r.getBts().getAddress() +" "+ r.getBts().getCity();
+                o[5] = r.getOrder().getProblem();
+                o[6] = r.getOrder().getSolution();
+                o[7] = r.getOrder().getNotes();
+                o[8] = r.getChecklist().getBattery();
+                o[9] = r.getChecklist().getGrounding();
+                o[10] = r.getChecklist().getGenset_fuel();
                 tableModel.addRow(o);
             }
             //tbl_bts.setAutoResizeMode( javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS );
