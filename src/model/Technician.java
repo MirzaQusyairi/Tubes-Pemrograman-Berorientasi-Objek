@@ -13,7 +13,6 @@ public class Technician {
         this.password = password;
         this.phone = phone;
         this.team_name = team_name;
-        
     }
     
     public int getId(){

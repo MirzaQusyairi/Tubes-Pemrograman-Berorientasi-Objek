@@ -177,7 +177,6 @@ public class FormChecklistTechnician extends javax.swing.JFrame {
         txt_tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
 
         txt_id_maintenance.setEditable(false);
-        txt_id_maintenance.setEnabled(false);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel7.setText("ID Maintenance");
@@ -295,14 +294,14 @@ public class FormChecklistTechnician extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String id_maintenance = txt_id_maintenance.getText();
-        String id_technician = txt_id_tech.getText();
+        int id_maintenance = Integer.parseInt(txt_id_maintenance.getText());
+        int id_technician = Integer.parseInt(txt_id_tech.getText());
         String battery =(String) txt_battery.getSelectedItem();
         String genset_fuel =(String)txt_genset_fuel.getSelectedItem();
         String grounding =(String) txt_grounding.getSelectedItem();
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         
-        Checklist c = new Checklist(null,id_maintenance,id_technician,battery,genset_fuel,grounding,tanggal);
+        Checklist c = new Checklist(0,id_maintenance,id_technician,battery,genset_fuel,grounding,tanggal);
         ctrl.insert_checklist(c);
         clear_form();
         setChecklistTable(ctrl.getAllChecklist());
@@ -311,16 +310,16 @@ public class FormChecklistTechnician extends javax.swing.JFrame {
     private void tbl_checklistMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_checklistMouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) tbl_checklist.getModel();
 
-        String tbl_ID = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),0);
-        String tbl_ID_Maintenance = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),1);
-        String tbl_ID_Tech = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),2);
+        int tbl_ID = (int) tblModel.getValueAt(tbl_checklist.getSelectedRow(),0);
+        int tbl_ID_Maintenance = (int) tblModel.getValueAt(tbl_checklist.getSelectedRow(),1);
+        int tbl_ID_Tech = (int) tblModel.getValueAt(tbl_checklist.getSelectedRow(),2);
         String tbl_battery = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),3);
         String tbl_genset_fuel = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),4);
         String tbl_groundingl = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),5);
         String tbl_date_check = (String) tblModel.getValueAt(tbl_checklist.getSelectedRow(),6);
         
-        txt_id.setText(tbl_ID);
-        txt_id_maintenance.setText(tbl_ID_Maintenance);
+        txt_id.setText(Integer.toString(tbl_ID));
+        txt_id_maintenance.setText(Integer.toString(tbl_ID_Maintenance));
         txt_battery.setSelectedItem(tbl_battery);
         txt_genset_fuel.setSelectedItem(tbl_genset_fuel);
         txt_grounding.setSelectedItem(tbl_groundingl);
@@ -338,14 +337,14 @@ public class FormChecklistTechnician extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_checklistMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String id = txt_id.getText();
+        int id = Integer.parseInt(txt_id.getText());
         String id_maintenance = txt_id_maintenance.getText();
         String battery =(String) txt_battery.getSelectedItem();
         String genset_fuel =(String)txt_genset_fuel.getSelectedItem();
         String grounding =(String) txt_grounding.getSelectedItem();
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         
-        Checklist c = new Checklist(id,null,null,battery,genset_fuel,grounding,tanggal);
+        Checklist c = new Checklist(id,0,0,battery,genset_fuel,grounding,tanggal);
         ctrl.update_checklist(c);
         clear_form();
         setChecklistTable(ctrl.getAllChecklist());

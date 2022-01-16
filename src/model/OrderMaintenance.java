@@ -5,11 +5,11 @@ import java.time.LocalDate;
 
 
 public class OrderMaintenance {
-    private String id, id_bts, id_user;
+    private int id, id_bts, id_user;
     private String problem, solution, notes, approval;
     private String finish_date;
 
-    public OrderMaintenance(String id, String id_user, String id_bts,  String problem, String solution, String notes, String finish_date, String approval) {
+    public OrderMaintenance(int id, int id_user, int id_bts, String problem, String solution, String notes, String finish_date, String approval) {
         this.id = id;
         this.id_user = id_user;
         this.id_bts = id_bts;
@@ -20,27 +20,27 @@ public class OrderMaintenance {
         this.approval = approval;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getId_bts() {
+    public int getId_bts() {
         return id_bts;
     }
 
-    public void setId_bts(String id_bts) {
+    public void setId_bts(int id_bts) {
         this.id_bts = id_bts;
     }
 
-    public String getId_user() {
+    public int getId_user() {
         return id_user;
     }
 
-    public void setId_user(String id_user) {
+    public void setId_user(int id_user) {
         this.id_user = id_user;
     }
 

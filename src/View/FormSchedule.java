@@ -250,11 +250,11 @@ public class FormSchedule extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String id_bts = txt_id_bts.getText();
+        int id_bts = Integer.parseInt(txt_id_bts.getText());
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         String status = (String) txt_status.getSelectedItem();
         
-        Schedule s = new Schedule(null,id_bts,tanggal,status);
+        Schedule s = new Schedule(0,id_bts,tanggal,status);
         model.insert_schedule(s);
         clear_form();
         setScheduleTable(model.getAllSchedule());
@@ -263,13 +263,13 @@ public class FormSchedule extends javax.swing.JFrame {
     private void tbl_scheduleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_scheduleMouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) tbl_schedule.getModel();
 
-        String tbl_ID = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),0);
-        String tbl_ID_BTS = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),1);
+        int tbl_ID = (int) tblModel.getValueAt(tbl_schedule.getSelectedRow(),0);
+        int tbl_ID_BTS = (int) tblModel.getValueAt(tbl_schedule.getSelectedRow(),1);
         String tbl_Tanggal = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),2);
         String tbl_Status = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),3);
         
-        txt_id.setText(tbl_ID);
-        txt_id_bts.setText(tbl_ID_BTS);
+        txt_id.setText(Integer.toString(tbl_ID));
+        txt_id_bts.setText(Integer.toString(tbl_ID_BTS));
         String[] arrayDate = tbl_Tanggal.split("-");
         int bulan = Integer.parseInt(arrayDate[1]);
         int hari = Integer.parseInt(arrayDate[2]);
@@ -284,8 +284,8 @@ public class FormSchedule extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_scheduleMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String id = txt_id.getText();
-        String id_bts = txt_id_bts.getText();
+        int id = Integer.parseInt(txt_id.getText());
+        int id_bts = Integer.parseInt(txt_id_bts.getText());
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         String status = (String) txt_status.getSelectedItem();
         

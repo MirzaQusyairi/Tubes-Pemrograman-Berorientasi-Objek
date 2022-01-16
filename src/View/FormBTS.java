@@ -241,7 +241,7 @@ public class FormBTS extends javax.swing.JFrame {
         String city = txt_city.getText();
         Merk_BTS merk = (Merk_BTS) txt_merk.getSelectedItem();
         
-        BTS b = new BTS(null, name, address, city, merk);
+        BTS b = new BTS(0, name, address, city, merk);
         ctrl.insert_bts(b);
         clear_form();
         setBTSTable(ctrl.getAllBTS());
@@ -250,13 +250,14 @@ public class FormBTS extends javax.swing.JFrame {
     private void tbl_btsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_btsMouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) tbl_bts.getModel();
 
-        String tbl_ID = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),0);
+        int tbl_ID = (int) tblModel.getValueAt(tbl_bts.getSelectedRow(),0);
         String tbl_Name = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),1);
         String tbl_Address = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),2);
         String tbl_City = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),3);
         String tbl_Merk = (String) tblModel.getValueAt(tbl_bts.getSelectedRow(),4);
         
-        txt_id.setText(tbl_ID);
+        System.out.println(tbl_Merk);
+        txt_id.setText(Integer.toString(tbl_ID));
         txt_name.setText(tbl_Name);
         txt_address.setText(tbl_Address);
         txt_city.setText(tbl_City);
@@ -267,7 +268,7 @@ public class FormBTS extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_btsMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String id = txt_id.getText();
+        int id = Integer.parseInt(txt_id.getText());
         String name = txt_name.getText();
         String address = txt_address.getText();
         String city = txt_city.getText();

@@ -80,14 +80,14 @@ public class Controller {
         return false;
     }
     
-    public void insert_technician(String name, String phone, String teamname, String username, String password) {
+    public void insert_technician(Technician t) {
         try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO technician(name,username,password,phone,team_name) VALUES (?,?,?,?,?)");            
-            stmt.setString(1,name);
-            stmt.setString(2,username);
-            stmt.setString(3,password);
-            stmt.setString(4,phone);
-            stmt.setString(5,teamname);
+            stmt.setString(1,t.getName());
+            stmt.setString(2,t.getUsername());
+            stmt.setString(3,t.getPasswod());
+            stmt.setString(4,t.getPhone());
+            stmt.setString(5,t.getteam_name());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Insert Technician Success");
         } catch (SQLException sqle) {
@@ -96,15 +96,15 @@ public class Controller {
         }
     }
     
-    public void update_technician(String id, String name, String phone, String teamname, String username, String password){
+    public void update_technician(Technician t){
         try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE technician set name=?,username=?,password=?,phone=?,team_name=? WHERE id=?");   
-            stmt.setString(1,name);
-            stmt.setString(2,username);
-            stmt.setString(3,password);
-            stmt.setString(4,phone);
-            stmt.setString(5,teamname);
-            stmt.setString(6,id);
+            stmt.setString(1,t.getName());
+            stmt.setString(2,t.getUsername());
+            stmt.setString(3,t.getPasswod());
+            stmt.setString(4,t.getPhone());
+            stmt.setString(5,t.getteam_name());
+            stmt.setInt(6,t.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Technician Success");
         } catch (SQLException sqle) {
@@ -171,7 +171,7 @@ public class Controller {
             stmt.setString(2,b.getAddress());
             stmt.setString(3,b.getCity());
             stmt.setInt(4,b.getMerk().getId());
-            stmt.setString(5,b.getId());
+            stmt.setInt(5,b.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Technician Success");
         } catch (SQLException sqle) {
@@ -195,7 +195,7 @@ public class Controller {
     public void insert_schedule(Schedule s) {
          try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?)");            
-            stmt.setString(1,s.getId_bts());
+            stmt.setInt(1,s.getId_bts());
             stmt.setString(2,s.getDate_schedule());
             stmt.setString(3,s.getStatus());
             stmt.executeUpdate();
@@ -208,11 +208,11 @@ public class Controller {
     
     public void update_schedule(Schedule s){
         try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE schedule set date=?,status=?,id_bts=? WHERE id=?");   
-            stmt.setString(1,s.getDate_schedule());
-            stmt.setString(2,s.getStatus());
-            stmt.setString(3,s.getId_bts());
-            stmt.setString(4,s.getId());
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE schedule set id_bts=?,date=?,status=? WHERE id=?");   
+            stmt.setInt(1,s.getId_bts());
+            stmt.setString(2,s.getDate_schedule());
+            stmt.setString(3,s.getStatus());
+            stmt.setInt(4,s.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Schedule Success");
         } catch (SQLException sqle) {
@@ -245,7 +245,7 @@ public class Controller {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     BTS b = new BTS(
-                            rs.getString(1),
+                            rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
@@ -273,8 +273,8 @@ public class Controller {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     Schedule s = new Schedule(
-                            rs.getString(1),
-                            rs.getString(2),
+                            rs.getInt(1),
+                            rs.getInt(2),
                             rs.getString(3),
                             rs.getString(4)
                     );
@@ -317,8 +317,8 @@ public class Controller {
     public void insert_orderMaintenance(OrderMaintenance o) {
         try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO order_maintenance(id_user,id_bts,problem,solution,notes,finish_date) VALUES (?,?,?,?,?,?)");            
-            stmt.setString(1,o.getId_user());
-            stmt.setString(2,o.getId_bts());
+            stmt.setInt(1,o.getId_user());
+            stmt.setInt(2,o.getId_bts());
             stmt.setString(3,o.getProblem());
             stmt.setString(4,o.getSolution());
             stmt.setString(5,o.getNotes());
@@ -335,12 +335,12 @@ public class Controller {
     public void update_orderMaintenance(OrderMaintenance o){
         try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE order_maintenance set id_bts = ?, problem = ?, solution = ?, notes = ?, finish_date = ? WHERE id=?");   
-            stmt.setString(1,o.getId_bts());
+            stmt.setInt(1,o.getId_bts());
             stmt.setString(2,o.getProblem());
             stmt.setString(3,o.getSolution());
             stmt.setString(4,o.getNotes());
             stmt.setString(5,o.getFinish_date());
-            stmt.setString(6,o.getId());
+            stmt.setInt(6,o.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Order Maintenance Success");
         } catch (SQLException sqle) {
@@ -374,9 +374,9 @@ public class Controller {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     OrderMaintenance o = new OrderMaintenance(
-                            rs.getString(1),
-                            rs.getString(2),
-                            rs.getString(3),
+                            rs.getInt(1),
+                            rs.getInt(2),
+                            rs.getInt(3),
                             rs.getString(4),
                             rs.getString(5),
                             rs.getString(6),
@@ -397,8 +397,8 @@ public class Controller {
     public void insert_checklist(Checklist c) {
         try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO checklist(id_maintenance,id_technician,battery,genset_fuel,grounding,date_check) VALUES (?,?,?,?,?,?)");            
-            stmt.setString(1,c.getId_maintenance());
-            stmt.setString(2,c.getId_technician());
+            stmt.setInt(1,c.getId_maintenance());
+            stmt.setInt(2,c.getId_technician());
             stmt.setString(3,c.getBattery());
             stmt.setString(4,c.getGenset_fuel());
             stmt.setString(5,c.getGrounding());
@@ -418,7 +418,7 @@ public class Controller {
             stmt.setString(2,c.getGenset_fuel());
             stmt.setString(3,c.getGrounding());
             stmt.setString(4,c.getDate_check());
-            stmt.setString(5,c.getId());            
+            stmt.setInt(5,c.getId());            
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Checklist Success");
         } catch (SQLException sqle) {
@@ -451,9 +451,9 @@ public class Controller {
                 ResultSet rs = statement.executeQuery();
                 while (rs.next()){
                     Checklist c = new Checklist(
-                            rs.getString(1),
-                            rs.getString(2),
-                            rs.getString(3),
+                            rs.getInt(1),
+                            rs.getInt(2),
+                            rs.getInt(3),
                             rs.getString(4),
                             rs.getString(5),
                             rs.getString(6),

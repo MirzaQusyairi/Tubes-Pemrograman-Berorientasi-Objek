@@ -297,18 +297,17 @@ public class FormMaintenanceTechnician extends javax.swing.JFrame {
     private void tbl_orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_orderMouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) tbl_order.getModel();
 
-        String tbl_id = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),0);
-        String tbl_id_user = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),1);
-        String tbl_id_bts = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),2);
+        int tbl_id = (int) tblModel.getValueAt(tbl_order.getSelectedRow(),0);
+        int tbl_id_tech = (int) tblModel.getValueAt(tbl_order.getSelectedRow(),1);
+        int tbl_id_bts = (int) tblModel.getValueAt(tbl_order.getSelectedRow(),2);
         String tbl_problem = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),3);
         String tbl_solution = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),4);
         String tbl_notes = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),5);
         String tbl_finishdate = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),6);
         String tbl_approval = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),7);
         
-        txt_id.setText(tbl_id);
-        txt_id_tech.setText(tbl_id_user);
-        txt_id_bts.setText(tbl_id_bts);
+        txt_id.setText(Integer.toString(tbl_id));
+        txt_id_bts.setText(Integer.toString(tbl_id_bts));
         txt_problem.setText(tbl_problem);
         txt_solution.setText(tbl_solution);
         txt_notes.setText(tbl_notes);
@@ -328,15 +327,14 @@ public class FormMaintenanceTechnician extends javax.swing.JFrame {
     }//GEN-LAST:event_tbl_orderMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String id = txt_id.getText();
-        String id_user = txt_id_tech.getText();
-        String id_bts = txt_id_bts.getText();
+        int id = Integer.parseInt(txt_id.getText());
+        int id_bts = Integer.parseInt(txt_id_bts.getText());
         String problem = txt_problem.getText();
         String solution = txt_solution.getText();
         String notes = txt_notes.getText();
         String finish_date = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         
-        OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution, notes, finish_date, null);
+        OrderMaintenance o = new OrderMaintenance(id, 0, id_bts, problem, solution, notes, finish_date, null);
         ctrl.update_orderMaintenance(o);
         clear_form();
         setOrderMaintenanceTable(ctrl.getAllOrder());
@@ -354,7 +352,6 @@ public class FormMaintenanceTechnician extends javax.swing.JFrame {
     private void clear_form(){
         txt_id.setText("");
         txt_id_bts.setText("");
-        txt_id_tech.setText("");
         txt_problem.setText("");
         txt_solution.setText("");
         txt_notes.setText("");

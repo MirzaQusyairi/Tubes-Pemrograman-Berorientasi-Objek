@@ -4,9 +4,10 @@ package model;
 
 public class Checklist {
     
-    private String id_technician, battery, genset_fuel, grounding, date_check, id, id_maintenance;
+    private int id, id_maintenance, id_technician;
+    private String battery, genset_fuel, grounding, date_check;
     
-    public Checklist(String id, String id_maintenance, String id_technician, String battery, String genset_fuel, String grounding, String date_check) {
+    public Checklist(int id, int id_maintenance, int id_technician, String battery, String genset_fuel, String grounding, String date_check) {
         this.id = id;
         this.id_maintenance = id_maintenance;
         this.id_technician = id_technician;
@@ -15,12 +16,28 @@ public class Checklist {
         this.grounding = grounding;
         this.date_check = date_check;
     }
+    
+    public int getId() {
+        return id;
+    }
 
-    public String getId_technician() {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId_maintenance() {
+        return id_maintenance;
+    }
+
+    public void setId_maintenance(int id_maintenance) {
+        this.id_maintenance = id_maintenance;
+    }
+
+    public int getId_technician() {
         return id_technician;
     }
 
-    public void setId_technician(String id_technician) {
+    public void setId_technician(int id_technician) {
         this.id_technician = id_technician;
     }
 
@@ -55,21 +72,5 @@ public class Checklist {
     public void setDate_check(String date_check) {
         this.date_check = date_check;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getId_maintenance() {
-        return id_maintenance;
-    }
-
-    public void setId_maintenance(String id_maintenance) {
-        this.id_maintenance = id_maintenance;
-    }
-       
+ 
 }

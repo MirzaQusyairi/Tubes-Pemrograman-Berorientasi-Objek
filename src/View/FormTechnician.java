@@ -7,6 +7,7 @@ package View;
 
 import Controller.Controller;
 import javax.swing.table.DefaultTableModel;
+import model.Technician;
 
 /**
  *
@@ -259,19 +260,23 @@ public class FormTechnician extends javax.swing.JFrame {
         String teamname = txt_teamname.getText();
         String username = txt_username.getText();
         String password = txt_password.getText();
-        ctrl.insert_technician(name, phone, teamname, username, password);
+        
+        Technician t = new Technician(0, name, username, password, phone, teamname);
+        ctrl.insert_technician(t);
         clear_form();
         ctrl.display_technician(tbl_user);
     }//GEN-LAST:event_btn_insertActionPerformed
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
-        String id = txt_id.getText();
+        int id = Integer.parseInt(txt_id.getText());
         String name = txt_name.getText();
         String phone = txt_phone.getText();
         String teamname = txt_teamname.getText();
         String username = txt_username.getText();
         String password = txt_password.getText();
-        ctrl.update_technician(id, name, phone, teamname, username, password);
+        
+        Technician t = new Technician(id, name, username, password, phone, teamname);
+        ctrl.update_technician(t);
         clear_form();
         ctrl.display_technician(tbl_user);
         btn_insert.setEnabled(true);

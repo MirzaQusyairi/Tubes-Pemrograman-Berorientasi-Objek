@@ -10,10 +10,11 @@ package model;
  * @author COMPUTER
  */
 public class BTS {
-    private String id, name, address, city;
+    private int id;
+    private String name, address, city;
     private Merk_BTS merk;
 
-    public BTS(String id, String name, String address, String city, Merk_BTS merk) {
+    public BTS(int id, String name, String address, String city, Merk_BTS merk) {
         this.id = id;
         this.merk = merk;
         this.name = name;
@@ -21,11 +22,11 @@ public class BTS {
         this.city = city;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
