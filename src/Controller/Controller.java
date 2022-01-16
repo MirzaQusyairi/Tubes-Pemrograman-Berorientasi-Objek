@@ -334,14 +334,13 @@ public class Controller {
     
     public void update_orderMaintenance(OrderMaintenance o){
         try {
-            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE order_maintenance set id_user = ?, id_bts = ?, problem = ?, solution = ?, notes = ?, finish_date = ? WHERE id=?");   
-            stmt.setString(1,o.getId_user());
-            stmt.setString(2,o.getId_bts());
-            stmt.setString(3,o.getProblem());
-            stmt.setString(4,o.getSolution());
-            stmt.setString(5,o.getNotes());
-            stmt.setString(6,o.getFinish_date());
-            stmt.setString(7,o.getId());
+            PreparedStatement stmt = kn.getKoneksi().prepareStatement("UPDATE order_maintenance set id_bts = ?, problem = ?, solution = ?, notes = ?, finish_date = ? WHERE id=?");   
+            stmt.setString(1,o.getId_bts());
+            stmt.setString(2,o.getProblem());
+            stmt.setString(3,o.getSolution());
+            stmt.setString(4,o.getNotes());
+            stmt.setString(5,o.getFinish_date());
+            stmt.setString(6,o.getId());
             stmt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Update Order Maintenance Success");
         } catch (SQLException sqle) {
@@ -470,5 +469,5 @@ public class Controller {
         }
         return checklist;
     }
-    
+   
 }

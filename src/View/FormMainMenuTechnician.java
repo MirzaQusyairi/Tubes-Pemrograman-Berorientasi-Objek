@@ -98,9 +98,9 @@ public class FormMainMenuTechnician extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 528, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 433, Short.MAX_VALUE)
                 .addComponent(btn_logout)
-                .addGap(46, 46, 46))
+                .addGap(141, 141, 141))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +179,7 @@ public class FormMainMenuTechnician extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_maintenanceActionPerformed
 
     private void btn_scheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_scheduleActionPerformed
-        // TODO add your handling code here:
+        new FormScheduleTechnician().setVisible(true);
     }//GEN-LAST:event_btn_scheduleActionPerformed
 
     private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
