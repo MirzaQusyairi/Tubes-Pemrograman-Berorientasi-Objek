@@ -21,6 +21,9 @@ public class FormTechnician extends javax.swing.JFrame {
     public FormTechnician() {
         initComponents();
         txt_id.setVisible(false);
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
         ctrl.display_technician(tbl_user);
     }
 
@@ -54,29 +57,30 @@ public class FormTechnician extends javax.swing.JFrame {
         btn_clear = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(24, 146, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("TECHNICIAN DATA");
+        jLabel1.setText("Technician Data");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(201, 201, 201)
+                .addGap(226, 226, 226)
                 .addComponent(jLabel1)
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(233, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(160, 219, 251));
@@ -270,6 +274,9 @@ public class FormTechnician extends javax.swing.JFrame {
         ctrl.update_technician(id, name, phone, teamname, username, password);
         clear_form();
         ctrl.display_technician(tbl_user);
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_updateActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -277,10 +284,16 @@ public class FormTechnician extends javax.swing.JFrame {
         ctrl.delete_technician(idInt);
         clear_form();
         ctrl.display_technician(tbl_user);
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         clear_form();
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void tbl_userMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_userMouseClicked
@@ -299,6 +312,9 @@ public class FormTechnician extends javax.swing.JFrame {
         txt_password.setText(tbl_Password);   
         txt_phone.setText(tbl_Phone);
         txt_teamname.setText(tbl_Teamname);
+        btn_insert.setEnabled(false);
+        btn_update.setEnabled(true);
+        btn_delete.setEnabled(true);
     }//GEN-LAST:event_tbl_userMouseClicked
 
     /**

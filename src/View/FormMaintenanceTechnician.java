@@ -5,7 +5,7 @@
  */
 package View;
 
-import model.User;
+import model.Technician;
 import model.OrderMaintenance;
 import Controller.Controller;
 import java.util.List;
@@ -17,34 +17,38 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Asus
  */
-public class FormOrderMaintenance extends javax.swing.JFrame {
+public class FormMaintenanceTechnician extends javax.swing.JFrame {
 
     /**
      * Creates new form FormBTS
      */
-    private User user_info;
+    private Technician tech_info;
     Controller ctrl = new Controller();
-    public FormOrderMaintenance() {
+    public FormMaintenanceTechnician() {
         initComponents();
-    }
-    
-    public FormOrderMaintenance(User user_info) {
-        this.user_info = user_info;
-        initComponents();
-        txt_id_user.setText(Integer.toString(user_info.getId()));
         txt_id.setVisible(false);
-        txt_id_user.setVisible(false);
-        btn_update.setEnabled(false);
-        btn_delete.setEnabled(false);
+        txt_id_tech.setVisible(false);
         setOrderMaintenanceTable(ctrl.getAllOrder());
     }
-
-    public User getUser_info() {
-        return user_info;
+    
+    public FormMaintenanceTechnician(Technician tech_info) {
+        this.tech_info = tech_info;
+        initComponents();
+        txt_id_tech.setText(Integer.toString(tech_info.getId()));
+        txt_id.setVisible(false);
+        txt_id_tech.setVisible(false);
+        setOrderMaintenanceTable(ctrl.getAllOrder());
+        btn_checklist.setEnabled(false);
+        btn_update.setEnabled(false);
+        btn_clear.setEnabled(false);
     }
 
-    public void setUser_info(User user_info) {
-        this.user_info = user_info;
+    public Technician getTechnician_info() {
+        return tech_info;
+    }
+
+    public void setTechnician_info(Technician tech_info) {
+        this.tech_info = tech_info;
     }
 
     /**
@@ -63,49 +67,50 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_order = new javax.swing.JTable();
-        btn_insert = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         btn_update = new javax.swing.JButton();
-        btn_delete = new javax.swing.JButton();
         txt_id = new javax.swing.JLabel();
         btn_clear = new javax.swing.JButton();
-        txt_id_user = new javax.swing.JLabel();
+        txt_id_tech = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         txt_id_bts = new javax.swing.JTextField();
-        btn_search = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txt_solution = new javax.swing.JTextArea();
         jScrollPane3 = new javax.swing.JScrollPane();
         txt_notes = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         txt_problem = new javax.swing.JTextArea();
+        btn_checklist = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txt_hari = new javax.swing.JComboBox<>();
+        txt_bulan = new javax.swing.JComboBox<>();
+        txt_tahun = new javax.swing.JComboBox<>();
 
         txt_merk.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel2.setBackground(new java.awt.Color(24, 146, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Order Maintenance");
+        jLabel1.setText("Maintenance List");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(222, 222, 222)
+                .addGap(234, 234, 234)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -129,14 +134,6 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_order);
 
-        btn_insert.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_insert.setText("Insert");
-        btn_insert.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_insertActionPerformed(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setText("Notes");
 
@@ -145,14 +142,6 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
-            }
-        });
-
-        btn_delete.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btn_delete.setText("Delete");
-        btn_delete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_deleteActionPerformed(evt);
             }
         });
 
@@ -167,18 +156,14 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
             }
         });
 
-        txt_id_user.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txt_id_user.setText("id user");
+        txt_id_tech.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_id_tech.setText("id tech");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("Problem");
 
-        btn_search.setText("Search");
-        btn_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_searchActionPerformed(evt);
-            }
-        });
+        txt_id_bts.setEditable(false);
+        txt_id_bts.setEnabled(false);
 
         txt_solution.setColumns(20);
         txt_solution.setRows(5);
@@ -188,9 +173,27 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         txt_notes.setRows(5);
         jScrollPane3.setViewportView(txt_notes);
 
+        txt_problem.setEditable(false);
         txt_problem.setColumns(20);
         txt_problem.setRows(5);
         jScrollPane4.setViewportView(txt_problem);
+
+        btn_checklist.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btn_checklist.setText("Checklist Form");
+        btn_checklist.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_checklistActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setText("Finish Date");
+
+        txt_hari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        txt_bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        txt_tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -199,19 +202,12 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 705, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txt_id)
                         .addGap(18, 18, 18)
-                        .addComponent(txt_id_user))
+                        .addComponent(txt_id_tech))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
@@ -220,20 +216,31 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                             .addComponent(txt_id_bts))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel4))
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel4))
+                                .addGap(36, 36, 36)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2)))
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jScrollPane1))
+                                .addComponent(txt_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btn_checklist, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(246, 246, 246)))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -243,20 +250,9 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_id)
-                    .addComponent(txt_id_user))
+                    .addComponent(txt_id_tech))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txt_id_bts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_search))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jScrollPane4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
@@ -264,16 +260,30 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(35, 35, 35)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txt_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txt_id_bts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_checklist, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -282,33 +292,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         clear_form();
-        btn_insert.setEnabled(true);
-        btn_update.setEnabled(false);
-        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_clearActionPerformed
-
-    private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
-        int idInt = Integer.parseInt(txt_id.getText());
-        ctrl.delete_orderMaintenance(idInt);
-        clear_form();
-        setOrderMaintenanceTable(ctrl.getAllOrder());
-        btn_insert.setEnabled(true);
-        btn_update.setEnabled(false);
-        btn_delete.setEnabled(false);
-    }//GEN-LAST:event_btn_deleteActionPerformed
-
-    private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String id_user = txt_id_user.getText();
-        String id_bts = txt_id_bts.getText();
-        String problem = txt_problem.getText();
-        String solution = txt_solution.getText();
-        String notes = txt_notes.getText();
-        
-        OrderMaintenance o = new OrderMaintenance(null, id_user, id_bts, problem, solution, notes, null, null);
-        ctrl.insert_orderMaintenance(o);
-        clear_form();
-        setOrderMaintenanceTable(ctrl.getAllOrder());
-    }//GEN-LAST:event_btn_insertActionPerformed
 
     private void tbl_orderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_orderMouseClicked
         DefaultTableModel tblModel = (DefaultTableModel) tbl_order.getModel();
@@ -319,48 +303,66 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         String tbl_problem = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),3);
         String tbl_solution = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),4);
         String tbl_notes = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),5);
-        String tbl_approval = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),6);
-        String tbl_finishdate = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),7);
+        String tbl_finishdate = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),6);
+        String tbl_approval = (String) tblModel.getValueAt(tbl_order.getSelectedRow(),7);
         
         txt_id.setText(tbl_id);
-        txt_id_user.setText(tbl_id_user);
+        txt_id_tech.setText(tbl_id_user);
         txt_id_bts.setText(tbl_id_bts);
         txt_problem.setText(tbl_problem);
         txt_solution.setText(tbl_solution);
         txt_notes.setText(tbl_notes);
         
-        btn_insert.setEnabled(false);
+        if(tbl_finishdate != null){
+            String[] arrayDate = tbl_finishdate.split("-");
+            int bulan = Integer.parseInt(arrayDate[1]);
+            int hari = Integer.parseInt(arrayDate[2]);
+            txt_hari.setSelectedItem(Integer.toString(hari));
+            txt_bulan.setSelectedItem(Integer.toString(bulan));
+            txt_tahun.setSelectedItem(arrayDate[0]);
+        }
+        
+        btn_checklist.setEnabled(true);
         btn_update.setEnabled(true);
-        btn_delete.setEnabled(true);
+        btn_clear.setEnabled(true);
     }//GEN-LAST:event_tbl_orderMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         String id = txt_id.getText();
-        String id_user = txt_id_user.getText();
+        String id_user = txt_id_tech.getText();
         String id_bts = txt_id_bts.getText();
         String problem = txt_problem.getText();
         String solution = txt_solution.getText();
         String notes = txt_notes.getText();
+        String finish_date = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         
-        OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution, notes, null, null);
+        OrderMaintenance o = new OrderMaintenance(id, id_user, id_bts, problem, solution, notes, finish_date, null);
         ctrl.update_orderMaintenance(o);
         clear_form();
         setOrderMaintenanceTable(ctrl.getAllOrder());
-        btn_insert.setEnabled(true);
+        
+        btn_checklist.setEnabled(false);
         btn_update.setEnabled(false);
-        btn_delete.setEnabled(false);
+        btn_clear.setEnabled(false);
     }//GEN-LAST:event_btn_updateActionPerformed
 
-    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
-        new FormBTS().setVisible(true);
-    }//GEN-LAST:event_btn_searchActionPerformed
+    private void btn_checklistActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_checklistActionPerformed
+        new FormChecklistTechnician(txt_id.getText(),txt_id_tech.getText()).setVisible(true);
+        btn_checklist.setEnabled(false);
+    }//GEN-LAST:event_btn_checklistActionPerformed
     
     private void clear_form(){
         txt_id.setText("");
         txt_id_bts.setText("");
+        txt_id_tech.setText("");
         txt_problem.setText("");
         txt_solution.setText("");
         txt_notes.setText("");
+        txt_hari.setSelectedIndex(0);
+        txt_bulan.setSelectedIndex(0);
+        txt_tahun.setSelectedIndex(0);
+        
+        btn_checklist.setEnabled(false);
     }
     
     private void setOrderMaintenanceTable(List<OrderMaintenance> listOrder) {
@@ -382,7 +384,7 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
             );
 
             for (OrderMaintenance o : listOrder) {
-                Object[] A = new Object[8];
+                Object[] A = new Object[9];
                 A[0] = o.getId();
                 A[1] = o.getId_user();
                 A[2] = o.getId_bts();
@@ -417,14 +419,22 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormOrderMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMaintenanceTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormOrderMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMaintenanceTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormOrderMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMaintenanceTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormOrderMaintenance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormMaintenanceTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -437,34 +447,36 @@ public class FormOrderMaintenance extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormOrderMaintenance().setVisible(true);
+                new FormMaintenanceTechnician().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_checklist;
     private javax.swing.JButton btn_clear;
-    private javax.swing.JButton btn_delete;
-    private javax.swing.JButton btn_insert;
-    private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable tbl_order;
+    private javax.swing.JComboBox<String> txt_bulan;
+    private javax.swing.JComboBox<String> txt_hari;
     private javax.swing.JLabel txt_id;
     private javax.swing.JTextField txt_id_bts;
-    private javax.swing.JLabel txt_id_user;
+    private javax.swing.JLabel txt_id_tech;
     private javax.swing.JComboBox<String> txt_merk;
     private javax.swing.JTextArea txt_notes;
     private javax.swing.JTextArea txt_problem;
     private javax.swing.JTextArea txt_solution;
+    private javax.swing.JComboBox<String> txt_tahun;
     // End of variables declaration//GEN-END:variables
 }

@@ -25,8 +25,9 @@ public class FormSchedule extends javax.swing.JFrame {
     public FormSchedule() {
         initComponents();
         txt_id.setVisible(false);
-       
         setScheduleTable(model.getAllSchedule());
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }
 
     /**
@@ -41,7 +42,7 @@ public class FormSchedule extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txt_name = new javax.swing.JTextField();
+        txt_id_bts = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_schedule = new javax.swing.JTable();
         btn_insert = new javax.swing.JButton();
@@ -49,36 +50,38 @@ public class FormSchedule extends javax.swing.JFrame {
         btn_delete = new javax.swing.JButton();
         txt_id = new javax.swing.JLabel();
         btn_clear = new javax.swing.JButton();
-        txt_idbts = new javax.swing.JLabel();
         txt_hari = new javax.swing.JComboBox<>();
         txt_tahun = new javax.swing.JComboBox<>();
         txt_bulan = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txt_status = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        btn_search = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(24, 146, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("SCHEDULE DATA");
+        jLabel1.setText("Schedule Data");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(205, 205, 205)
+                .addGap(224, 224, 224)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(27, 27, 27))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -134,22 +137,24 @@ public class FormSchedule extends javax.swing.JFrame {
             }
         });
 
-        txt_idbts.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txt_idbts.setText("ID_BTS");
+        txt_hari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
 
-        txt_hari.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022", "2023", "2024", "2025" }));
 
-        txt_tahun.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        txt_bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txt_bulan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Status");
 
         txt_status.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Done", "On-process" }));
-        txt_status.addActionListener(new java.awt.event.ActionListener() {
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setText("ID BTS");
+
+        btn_search.setText("...");
+        btn_search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_statusActionPerformed(evt);
+                btn_searchActionPerformed(evt);
             }
         });
 
@@ -166,27 +171,29 @@ public class FormSchedule extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(txt_tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(txt_idbts)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_hari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_bulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_tahun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txt_id_bts, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_search, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txt_status, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -195,10 +202,11 @@ public class FormSchedule extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(txt_id)
-                .addGap(18, 18, 18)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_idbts)
-                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_id_bts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(btn_search))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -217,7 +225,7 @@ public class FormSchedule extends javax.swing.JFrame {
                     .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,21 +234,26 @@ public class FormSchedule extends javax.swing.JFrame {
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         clear_form();
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int idInt = Integer.parseInt(txt_id.getText());
-        model.delete_bts(idInt);
+        model.delete_schedule(idInt);
         clear_form();
         setScheduleTable(model.getAllSchedule());
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        String id_bts = txt_idbts.getText();
+        String id_bts = txt_id_bts.getText();
         String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         String status = (String) txt_status.getSelectedItem();
         
-              
         Schedule s = new Schedule(null,id_bts,tanggal,status);
         model.insert_schedule(s);
         clear_form();
@@ -253,39 +266,46 @@ public class FormSchedule extends javax.swing.JFrame {
         String tbl_ID = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),0);
         String tbl_ID_BTS = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),1);
         String tbl_Tanggal = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),2);
-        String tbl_City = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),3);
-        String tbl_Merk = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),4);
+        String tbl_Status = (String) tblModel.getValueAt(tbl_schedule.getSelectedRow(),3);
         
         txt_id.setText(tbl_ID);
-        txt_idbts.setText(tbl_ID_BTS);
+        txt_id_bts.setText(tbl_ID_BTS);
         String[] arrayDate = tbl_Tanggal.split("-");
         int bulan = Integer.parseInt(arrayDate[1]);
         int hari = Integer.parseInt(arrayDate[2]);
         txt_hari.setSelectedItem(Integer.toString(hari));
         txt_bulan.setSelectedItem(Integer.toString(bulan));
         txt_tahun.setSelectedItem(arrayDate[0]);
+        txt_status.setSelectedItem(tbl_Status);
+        
+        btn_insert.setEnabled(false);
+        btn_update.setEnabled(true);
+        btn_delete.setEnabled(true);
     }//GEN-LAST:event_tbl_scheduleMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
         String id = txt_id.getText();
-        String id_bts = txt_idbts.getText();
-        String tanggal = txt_hari.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_tahun.getSelectedItem();
+        String id_bts = txt_id_bts.getText();
+        String tanggal = txt_tahun.getSelectedItem() + "-" + txt_bulan.getSelectedItem() +"-"+ txt_hari.getSelectedItem();
         String status = (String) txt_status.getSelectedItem();
-       
+        
         Schedule s = new Schedule(id,id_bts,tanggal,status);
         model.update_schedule(s);
         clear_form();
         setScheduleTable(model.getAllSchedule());
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_updateActionPerformed
 
-    private void txt_statusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_statusActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_statusActionPerformed
+    private void btn_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_searchActionPerformed
+        new FormBTS().setVisible(true);
+    }//GEN-LAST:event_btn_searchActionPerformed
     
     private void clear_form(){
         txt_id.setText("");
-        txt_idbts.setText("");
-        txt_status.setSelectedItem("");
+        txt_id_bts.setText("");
+        txt_status.setSelectedIndex(0);
         txt_hari.setSelectedIndex(0);
         txt_bulan.setSelectedIndex(0);
         txt_tahun.setSelectedIndex(0);
@@ -299,7 +319,7 @@ public class FormSchedule extends javax.swing.JFrame {
             tableModel.setColumnIdentifiers(
                 new String[] {
                     "ID",
-                    "ID_BTS",
+                    "ID BTS",
                     "Date",
                     "Status"
                 }
@@ -367,18 +387,19 @@ public class FormSchedule extends javax.swing.JFrame {
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_insert;
+    private javax.swing.JButton btn_search;
     private javax.swing.JButton btn_update;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_schedule;
     private javax.swing.JComboBox<String> txt_bulan;
     private javax.swing.JComboBox<String> txt_hari;
     private javax.swing.JLabel txt_id;
-    private javax.swing.JLabel txt_idbts;
-    private javax.swing.JTextField txt_name;
+    private javax.swing.JTextField txt_id_bts;
     private javax.swing.JComboBox<String> txt_status;
     private javax.swing.JComboBox<String> txt_tahun;
     // End of variables declaration//GEN-END:variables

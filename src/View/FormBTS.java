@@ -26,6 +26,8 @@ public class FormBTS extends javax.swing.JFrame {
     public FormBTS() {
         initComponents();
         txt_id.setVisible(false);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
         setMerk(ctrl.getAllMerk());
         setBTSTable(ctrl.getAllBTS());
     }
@@ -57,29 +59,30 @@ public class FormBTS extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_merk = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(24, 146, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("BTS DATA");
+        jLabel1.setText("BTS Data");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(256, 256, 256)
+                .addGap(271, 271, 271)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -166,7 +169,7 @@ public class FormBTS extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -191,16 +194,16 @@ public class FormBTS extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                    .addComponent(txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_address, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt_merk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                    .addComponent(txt_city, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_merk))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -208,7 +211,7 @@ public class FormBTS extends javax.swing.JFrame {
                     .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(164, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -217,6 +220,9 @@ public class FormBTS extends javax.swing.JFrame {
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         clear_form();
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -224,6 +230,9 @@ public class FormBTS extends javax.swing.JFrame {
         ctrl.delete_bts(idInt);
         clear_form();
         setBTSTable(ctrl.getAllBTS());
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_deleteActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
@@ -252,6 +261,9 @@ public class FormBTS extends javax.swing.JFrame {
         txt_address.setText(tbl_Address);
         txt_city.setText(tbl_City);
         txt_merk.setSelectedItem(tbl_Merk);
+        btn_insert.setEnabled(false);
+        btn_update.setEnabled(true);
+        btn_delete.setEnabled(true);
     }//GEN-LAST:event_tbl_btsMouseClicked
 
     private void btn_updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_updateActionPerformed
@@ -265,6 +277,9 @@ public class FormBTS extends javax.swing.JFrame {
         ctrl.update_bts(b);
         clear_form();
         setBTSTable(ctrl.getAllBTS());
+        btn_insert.setEnabled(true);
+        btn_update.setEnabled(false);
+        btn_delete.setEnabled(false);
     }//GEN-LAST:event_btn_updateActionPerformed
     
     private void clear_form(){

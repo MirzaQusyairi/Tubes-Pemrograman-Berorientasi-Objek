@@ -1,15 +1,12 @@
-package View;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package View;
 
-
-import model.Checklist;
-import model.Technician;
-import View.*;
+import model.BTS;
+import model.Merk_BTS;
 import Controller.Controller;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -20,15 +17,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Asus
  */
-public class FormChecklist extends javax.swing.JFrame {
+public class FormBTSTechnician extends javax.swing.JFrame {
 
     /**
      * Creates new form FormBTS
      */
     Controller ctrl = new Controller();
-    public FormChecklist() {
+    public FormBTSTechnician() {
         initComponents();
-        setChecklistTable(ctrl.getAllChecklist());
+        setBTSTable(ctrl.getAllBTS());
     }
 
     /**
@@ -43,7 +40,7 @@ public class FormChecklist extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbl_checklist = new javax.swing.JTable();
+        tbl_bts = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -52,16 +49,16 @@ public class FormChecklist extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Checklist Maintenance");
+        jLabel1.setText("BTS DATA");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(253, 253, 253)
+                .addGap(258, 258, 258)
                 .addComponent(jLabel1)
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(277, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +68,7 @@ public class FormChecklist extends javax.swing.JFrame {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        tbl_checklist.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_bts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null}
             },
@@ -79,59 +76,57 @@ public class FormChecklist extends javax.swing.JFrame {
                 "item1", "item2", "item3", "item4", "item5"
             }
         ));
-        jScrollPane1.setViewportView(tbl_checklist);
+        jScrollPane1.setViewportView(tbl_bts);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 772, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 644, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void setChecklistTable(List<Checklist> listChecklist) {
-        if (listChecklist==null){
+  
+    private void setBTSTable(List<BTS> listbts) {
+        if (listbts==null){
             JOptionPane.showMessageDialog(this, "Failed get BTS data from database","DATABASE FAILED",JOptionPane.ERROR_MESSAGE);
         }else{
             DefaultTableModel tableModel = new DefaultTableModel();
             tableModel.setColumnIdentifiers(
                 new String[] {
-                    "ID Maintenance",
-                    "ID Technician",
-                    "Battery",
-                    "Genset_Fuel",
-                    "Grounding",
-                    "Tanggal Pengecekan"
+                    "ID",
+                    "Name",
+                    "Address",
+                    "City",
+                    "Network"
                 }
             );
 
-            for (Checklist c : listChecklist) {
-                Object[] o = new Object[6];
-                o[0] = c.getId_maintenance();
-                o[1] = c.getId_technician();
-                o[2] = c.getBattery();
-                o[3] = c.getGenset_fuel();
-                o[4] = c.getGrounding();
-                o[5] = c.getDate_check();
+            for (BTS b : listbts) {
+                Object[] o = new Object[5];
+                o[0] = b.getId();
+                o[1] = b.getName();
+                o[2] = b.getAddress();
+                o[3] = b.getCity();
+                o[4] = b.getMerk().getName();
                 tableModel.addRow(o);
             }
             //tbl_bts.setAutoResizeMode( javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS );
-            tbl_checklist.setModel(tableModel);
+            tbl_bts.setModel(tableModel);
             //tbl_bts.getColumnModel().getColumn(0).setMinWidth(120);
             //tbl_bts.getColumnModel().getColumn(2).setMaxWidth(50);
         }
@@ -154,35 +149,27 @@ public class FormChecklist extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormChecklist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBTSTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormChecklist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBTSTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormChecklist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBTSTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormChecklist.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FormBTSTechnician.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
-//        </editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormChecklist().setVisible(true);
+                new FormBTSTechnician().setVisible(true);
             }
         });
     }
@@ -191,6 +178,6 @@ public class FormChecklist extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl_checklist;
+    private javax.swing.JTable tbl_bts;
     // End of variables declaration//GEN-END:variables
 }
