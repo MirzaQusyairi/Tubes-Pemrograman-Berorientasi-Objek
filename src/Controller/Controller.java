@@ -131,7 +131,7 @@ public class Controller {
             DefaultTableModel tblModel = (DefaultTableModel) JT.getModel();
             tblModel.setRowCount(0);
             Statement stmt = (Statement) kn.getKoneksi().createStatement();
-            String sql = "SELECT * FROM technician";
+            String sql = "SELECT * FROM technician ORDER BY id DESC";
             ResultSet rs = stmt.executeQuery(sql);
             
             while(rs.next()){
@@ -193,6 +193,60 @@ public class Controller {
         }
     }
     
+    public List<BTS> getAllBTS() {
+        List<BTS> bts = new ArrayList<BTS>();
+        String sql = "SELECT bts.id,bts.name,address,city,merk_bts.name FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts ORDER BY id DESC";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    BTS b = new BTS(
+                            rs.getInt(1),
+                            rs.getString(2),
+                            rs.getString(3),
+                            rs.getString(4),
+                            new Merk_BTS(0,rs.getString(5))
+                    );
+                    bts.add(b);
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return bts;
+    }
+    
+    public List<Merk_BTS> getAllMerk() {
+        List<Merk_BTS> merk_bts = new ArrayList<Merk_BTS>();
+        String sql = "SELECT * FROM merk_bts";
+        try {
+            if (kn.getKoneksi()==null){
+                return null;
+            }else{
+                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
+
+                ResultSet rs = statement.executeQuery();
+                while (rs.next()){
+                    Merk_BTS m = new Merk_BTS(
+                            rs.getInt(1),
+                            rs.getString(2)
+                    );
+                    merk_bts.add(m);
+                }
+                statement.close();
+            }
+        } catch (Exception ex) {
+            
+        }
+        
+        return merk_bts; 
+    }
+    
     public void insert_schedule(Schedule s) {
          try {
             PreparedStatement stmt = kn.getKoneksi().prepareStatement("INSERT INTO schedule(id_bts,date,status) VALUES (?,?,?)");            
@@ -233,38 +287,10 @@ public class Controller {
             JOptionPane.showMessageDialog(null,"Delete Schedule Failed");
         }
     }
- 
-    public List<BTS> getAllBTS() {
-        List<BTS> bts = new ArrayList<BTS>();
-        String sql = "SELECT * FROM bts INNER JOIN merk_bts ON merk_bts.id=bts.id_merkbts";
-        try {
-            if (kn.getKoneksi()==null){
-                return null;
-            }else{
-                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
-
-                ResultSet rs = statement.executeQuery();
-                while (rs.next()){
-                    BTS b = new BTS(
-                            rs.getInt(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            new Merk_BTS(rs.getInt(5),rs.getString(7))
-                    );
-                    bts.add(b);
-                }
-                statement.close();
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(BTS.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return bts;
-    }
     
     public List<Schedule> getAllSchedule() {
         List<Schedule> schedule = new ArrayList<Schedule>();
-        String sql = "SELECT * FROM schedule";
+        String sql = "SELECT * FROM schedule ORDER BY id DESC";
         try {
             if (kn.getKoneksi()==null){
                 return null;
@@ -289,31 +315,7 @@ public class Controller {
         return schedule;
     }
     
-    public List<Merk_BTS> getAllMerk() {
-        List<Merk_BTS> merk_bts = new ArrayList<Merk_BTS>();
-        String sql = "SELECT * FROM merk_bts";
-        try {
-            if (kn.getKoneksi()==null){
-                return null;
-            }else{
-                PreparedStatement statement = kn.getKoneksi().prepareStatement(sql);
-
-                ResultSet rs = statement.executeQuery();
-                while (rs.next()){
-                    Merk_BTS m = new Merk_BTS(
-                            rs.getInt(1),
-                            rs.getString(2)
-                    );
-                    merk_bts.add(m);
-                }
-                statement.close();
-            }
-        } catch (Exception ex) {
-            
-        }
-        
-        return merk_bts; 
-    }
+    
     
     public void insert_orderMaintenance(OrderMaintenance o) {
         try {
@@ -365,7 +367,7 @@ public class Controller {
     
     public List<OrderMaintenance> getAllOrder() {
         List<OrderMaintenance> order = new ArrayList<OrderMaintenance>();
-        String sql = "SELECT * FROM order_maintenance";
+        String sql = "SELECT * FROM order_maintenance ORDER BY id DESC";
         try {
             if (kn.getKoneksi()==null){
                 return null;
@@ -442,7 +444,7 @@ public class Controller {
     
     public List<Checklist> getAllChecklist() {
         List<Checklist> checklist = new ArrayList<Checklist>();
-        String sql = "SELECT * FROM checklist";
+        String sql = "SELECT * FROM checklist ORDER BY id DESC";
         try {
             if (kn.getKoneksi()==null){
                 return null;
@@ -473,7 +475,7 @@ public class Controller {
     
     public List<Report> getReport() {
         List<Report> report = new ArrayList<Report>();
-        String sql = "SELECT * FROM order_maintenance JOIN checklist ON order_maintenance.id=checklist.id_maintenance JOIN bts ON order_maintenance.id_bts=bts.id JOIN merk_bts ON bts.id_merkbts=merk_bts.id JOIN technician ON checklist.id_technician=technician.id";
+        String sql = "SELECT * FROM order_maintenance JOIN checklist ON order_maintenance.id=checklist.id_maintenance JOIN bts ON order_maintenance.id_bts=bts.id JOIN merk_bts ON bts.id_merkbts=merk_bts.id JOIN technician ON checklist.id_technician=technician.id ORDER BY checklist.id DESC";
         try {
             
             if (kn.getKoneksi()==null){
@@ -488,7 +490,6 @@ public class Controller {
                             new OrderMaintenance(rs.getInt(1),rs.getInt(2),rs.getInt(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8)),
                             new Checklist(rs.getInt(9),rs.getInt(10),rs.getInt(11),rs.getString(12),rs.getString(13),rs.getString(14),rs.getString(15)),
                             new BTS(rs.getInt(16),rs.getString(17),rs.getString(18),rs.getString(19),merk),
-                            //new Technician(0,null,null,null,null,null)
                             new Technician(rs.getInt(23),rs.getString(24),rs.getString(25),rs.getString(26),rs.getString(27),rs.getString(28))
                     );
                     report.add(r);
